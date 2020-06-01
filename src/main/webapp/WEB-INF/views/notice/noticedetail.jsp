@@ -56,7 +56,7 @@
 				href="<c:url value="/notice/noticedelete?noticeno=${notice.noticeno}"/>">
 					공지삭제 </a></li>
 			<li class="nav-item"><a class="nav-link active"
-				href="<c:url value="/notice.do?act=updateForm"/>"> 공지수정 </a></li>
+				href="<c:url value="/notice/noticeupdate?noticeno=${notice.noticeno }"/>"> 공지수정 </a></li>
 		</ul>
 	</div>
 </body>

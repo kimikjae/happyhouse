@@ -24,14 +24,12 @@
 						<tbody>
 							<tr>
 								<td>
-									<form method="post" action="<c:url value="/user.do"/>">
-										<input type="hidden" name="act" value="registerForm">
+									<form method="post" action="<c:url value="/user/registerform"/>">
 										<button class="btn btn-primary">회원 가입</button>
 									</form>
 								</td>
 								<td>
-									<form method="post" action="<c:url value="/user.do"/>">
-										<input type="hidden" name="act" value="loginForm">
+									<form method="post" action="<c:url value="/user/loginform"/>">
 										<button class="btn btn-primary">로그인</button>
 									</form>
 								</td>
@@ -47,14 +45,12 @@
 						<tbody>
 							<tr>
 								<td>
-									<form method="post" action="<c:url value="/user.do"/>">
-										<input type="hidden" name="act" value="logout">
+									<form method="post" action="<c:url value="/user/logout"/>">
 										<button class="btn btn-primary">Logout</button>
 									</form>
 								</td>
 								<td>
-									<form method="post" action="<c:url value="/user.do"/>">
-										<input type="hidden" name="act" value="mylist">
+									<form method="post" action="<c:url value="/user/list"/>">
 										<button class="btn btn-primary">회원정보</button>
 									</form>
 								</td>

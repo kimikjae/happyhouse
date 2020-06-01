@@ -17,7 +17,7 @@
 <div align="center">
 	<h2>탈퇴 되었습니다.</h2>
 	<div class="background1">
-	<a class="btn btn-primary" href="<c:url value="/user.do"/>" role="button">확인</a>
+	<a class="btn btn-primary" href="<c:url value="/"/>" role="button">확인</a>
 	</div>
 </div>
 </body>

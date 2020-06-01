@@ -20,8 +20,7 @@
 	<%@ include file="/WEB-INF/views/header.jsp"%>
 	<div align="center">
 		<h1>회원 정보 수정</h1>
-		<form method="post" action="<c:url value="/user.do"/>">
-			<input type="hidden" name="act" value="modify">
+		<form method="post" action="<c:url value="/user/modify"/>">
 			<div class="background1">
 			<div class="tablesize">
 			<table class="table table-hover table-primary">

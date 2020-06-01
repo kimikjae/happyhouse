@@ -26,8 +26,7 @@
 		<c:otherwise>
 			<h2 align="center">공지사항 작성</h2>
 			<div class="container" align="center">
-				<form method="post" action="<c:url value="/notice.do"/>">
-					<input type="hidden" name="act" value="write">
+				<form method="post" action="<c:url value="/notice/write"/>">
 					<div class="tableDiv">
 					<table class="table table-bordered">
 						<tbody>

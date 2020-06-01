@@ -46,9 +46,9 @@
 				</table>
 			</div>
 		</div>
-		<a class="btn btn-primary" href="<c:url value="/user.do"/>" role="button">확인</a> <a
-			class="btn btn-primary" href="<c:url value="/user.do?act=modifyForm"/>" role="button">수정</a> <a
-			class="btn btn-primary" href="<c:url value="/user.do?act=delete"/>" role="button">탈퇴</a>
+		<a class="btn btn-primary" href="<c:url value="/"/>" role="button">확인</a> <a
+			class="btn btn-primary" href="<c:url value="/user/modifyform"/>" role="button">수정</a> <a
+			class="btn btn-primary" href="<c:url value="/user/delete"/>" role="button">탈퇴</a>
 	</div>
 </body>
 </html>

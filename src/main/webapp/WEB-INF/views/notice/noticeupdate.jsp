@@ -19,23 +19,23 @@
 		<c:when test="${empty loginUser}">
 			<h2 align="center">로그인이 필요합니다</h2>
 			<div>
-				<form method="post" action="<c:url value="/user.do"/>">
-					<input type="hidden" name="act" value="registerForm">
+				<form method="post" action="<c:url value="/user/registerform"/>">
 					<button>회원 가입</button>
 				</form>
-				<form method="post" action="<c:url value="/user.do"/>">
-					<input type="hidden" name="act" value="loginForm">
+				<form method="post" action="<c:url value="/user/loginform"/>">
 					<button>로그인</button>
 				</form>
-				<a href="<c:url value="/user.do"/>">Home</a> <a
-					href="<c:url value="/notice.do?act=noticelist"/>">Back</a>
+				<a href="<c:url value="/index"/>">Home</a> <a
+					href="<c:url value="/notice/noticelist"/>">Back</a>
 			</div>
 		</c:when>
 		<c:otherwise>
 			<h2 align="center">글수정</h2>
 			<div class="container" align="center">
-				<form method="post" action="<c:url value="/notice.do"/>">
-					<input type="hidden" name="act" value="update">
+				<form method="post" action="<c:url value="/notice/update"/>">
+					<input type="hidden" name="noticeno" value="${notice.noticeno}">
+					<input type="hidden" name="id" value="${notice.id}">
+					<input type="hidden" name="name" value="${notice.name}">
 					<div class="tableDiv">
 						<table class="table table-bordered">
 							<tr>

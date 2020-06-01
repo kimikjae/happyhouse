@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ssafy.happyhouse.model.dto.MemberDto;
@@ -41,6 +42,47 @@ public class NoticeController {
 	public String noticedelete(int noticeno) throws Exception {
 		noticeService.deleteenotice(noticeno);
 		return "redirect:/notice/noticelist";
+	}
+	
+	@PostMapping("/noticewrite")
+	public void noticewrite() {}
+	
+	@PostMapping("/write")
+	public String write(HttpSession httpSession, NoticeDto noticeDto) throws Exception {
+		MemberDto member = (MemberDto)httpSession.getAttribute("loginUser");
+		noticeDto.setId(member.getId());
+		noticeDto.setName(member.getName());
+		noticeService.insertNotice(noticeDto);
+		return "redirect:/notice/noticelist";
+	}
+	
+	@GetMapping("/noticeupdate")
+	public void noticeupdate(Model model, int noticeno) throws Exception {
+		model.addAttribute("notice",noticeService.selectNoticeByNoticeNo(noticeno));
+	}
+	
+	@PostMapping("/update")
+	public String update(NoticeDto noticeDto) throws Exception {
+		noticeService.updatenotice(noticeDto);
+		return "redirect:/notice/noticedetail?noticeno=" + noticeDto.getNoticeno();
+	}
+	
+	private String noticewrite(HttpServletRequest request, HttpServletResponse response)throws Exception {	
+		HttpSession session =request.getSession();
+		MemberDto memberDto=(MemberDto)session.getAttribute("loginUser");
+		if(memberDto !=null) {
+			NoticeDto n =new NoticeDto();
+			n.setId(memberDto.getId());
+			n.setName(memberDto.getName());
+			n.setSubject(request.getParameter("subject"));
+			n.setContent(request.getParameter("content"));
+			noticeService.insertNotice(n);
+		}
+		return "redirect:/notice.do?act=noticelist&key=&word=";
+	}
+
+	private String writeForm(HttpServletRequest request, HttpServletResponse response)throws Exception {
+		return "/notice/noticewrite.jsp";
 	}
 	
 	private String noticedelete(HttpServletRequest request, HttpServletResponse response)throws Exception {
@@ -130,24 +172,7 @@ public class NoticeController {
 
 
 
-	private String noticewrite(HttpServletRequest request, HttpServletResponse response)throws Exception {
-		
-		HttpSession session =request.getSession();
-		MemberDto memberDto=(MemberDto)session.getAttribute("loginUser");
-		if(memberDto !=null) {
-			NoticeDto n =new NoticeDto();
-			n.setId(memberDto.getId());
-			n.setName(memberDto.getName());
-			n.setSubject(request.getParameter("subject"));
-			n.setContent(request.getParameter("content"));
-			noticeService.insertNotice(n);
-		}
-		return "redirect:/notice.do?act=noticelist&key=&word=";
-	}
 
-	private String writeForm(HttpServletRequest request, HttpServletResponse response)throws Exception {
-		return "/notice/noticewrite.jsp";
-	}
 
 	
 

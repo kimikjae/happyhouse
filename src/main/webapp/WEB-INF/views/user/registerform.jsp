@@ -29,8 +29,7 @@
 <body>
 	<%@ include file="/WEB-INF/views/header.jsp"%>
 	<div align="center">
-		<form method="post" action="<c:url value="/user.do"/>">
-			<input type="hidden" name="act" value="register">
+		<form method="post" action="<c:url value="/user/register"/>">
 			<h3>회원 가입</h3>
 			<div class="background1">
 				<div class="tablesize">

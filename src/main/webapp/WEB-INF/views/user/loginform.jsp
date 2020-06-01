@@ -26,8 +26,7 @@
 <body>
 	<%@ include file="/WEB-INF/views/header.jsp"%>
 	<div align="center">
-		<form method="post" action="<c:url value="/user.do"/>">
-			<input type="hidden" name="act" value="login" />
+		<form method="post" action="<c:url value="/user/login"/>">
 			<div class="background1">
 				<div class="tablesize">
 					<table class="table table-hover table-primary">
@@ -42,7 +41,7 @@
 					</table>
 					<button class="btn btn-primary">로그인</button>
 					<a class="btn btn-primary"
-						href="<c:url value="/user.do?act=passwordSearchForm"/>"
+						href="<c:url value="/user/passwordsearchform"/>"
 						role="button">비밀번호찾기</a>
 				</div>
 			</div>

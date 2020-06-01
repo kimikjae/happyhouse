@@ -84,7 +84,7 @@
 						</form>
 					</td>
 					<td align=right>
-						<form method="post" action="<c:url value="/notice.do"/>">
+						<form method="post" action="<c:url value="/notice/noticewrite"/>">
 							<input type="hidden" name="act" value="writeForm">
 							<button class="btn btn-primary">글쓰기</button>
 						</form>
