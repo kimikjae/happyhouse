@@ -14,27 +14,30 @@ import com.ssafy.happyhouse.model.dto.SearchDto;
 import com.ssafy.happyhouse.util.PageNavigation;
 
 @Service
-public class HouseServiceImpl implements HouseService{
-	
+public class HouseServiceImpl implements HouseService {
+
 	@Autowired
 	private HouseDao dao;
 
 	/**
-	 * 검색 조건(key) 검색 단어(word)에 해당하는 아파트 거래 정보(HouseInfo)를  검색해서 반환.  
-	 * @param bean  검색 조건과 검색 단어가 있는 객체
+	 * 검색 조건(key) 검색 단어(word)에 해당하는 아파트 거래 정보(HouseInfo)를 검색해서 반환.
+	 * 
+	 * @param bean 검색 조건과 검색 단어가 있는 객체
 	 * @return 조회한 식품 목록
 	 */
-	public List<HouseDeal> searchAll(SearchDto searchDto)throws SQLException{
+	public List<HouseDeal> searchAll(SearchDto searchDto) throws SQLException {
 		System.err.println("service");
-		List<HouseDeal>list=dao.searchAll(searchDto);
-		//정렬 알고리즘 -->퀵
-		if(list.size()!=0) {
-			for(int i=0;i<list.size();i++) {
+		List<HouseDeal> list = dao.searchAll(searchDto);
+		// 정렬 알고리즘 -->퀵
+		if (list.size() != 0) {
+			for (int i = 0; i < list.size(); i++) {
 				String temp = list.get(i).getDealAmount().replaceAll(",", "");
-				temp = temp.replaceAll(" ","");
+				temp = temp.replaceAll(" ", "");
 				list.get(i).setDealAmount(temp);
 			}
-			quicksort(list,0,list.size()-1);
+			quicksort(list, 0, list.size() - 1);
+		} else {
+			list = null;
 		}
 		return list;
 	}
@@ -42,8 +45,8 @@ public class HouseServiceImpl implements HouseService{
 	private void quicksort(List<HouseDeal> list, int start, int end) {
 		int left = start;
 		int right = end;
-		int pivot =Integer.parseInt(list.get((left+right)/2).getDealAmount());
-		do{
+		int pivot = Integer.parseInt(list.get((left + right) / 2).getDealAmount());
+		do {
 			while (Integer.parseInt(list.get(left).getDealAmount()) < pivot) {
 				left++;
 			}
@@ -55,7 +58,7 @@ public class HouseServiceImpl implements HouseService{
 				left++;
 				right--;
 			}
-		}while (left <= right);
+		} while (left <= right);
 		if (start < right) {
 			quicksort(list, start, right);
 		}
@@ -66,19 +69,21 @@ public class HouseServiceImpl implements HouseService{
 	}
 
 	/**
-	 * 아파트 식별 번호에 해당하는 아파트 거래 정보를 검색해서 반환. 
-	 * @param no	검색할 아파트 식별 번호
-	 * @return		아파트 식별 번호에 해당하는 아파트 거래 정보를 찾아서 리턴한다, 없으면 null이 리턴됨
+	 * 아파트 식별 번호에 해당하는 아파트 거래 정보를 검색해서 반환.
+	 * 
+	 * @param no 검색할 아파트 식별 번호
+	 * @return 아파트 식별 번호에 해당하는 아파트 거래 정보를 찾아서 리턴한다, 없으면 null이 리턴됨
 	 */
 	@Override
 	public List<HouseDeal> searchAll() {
 		try {
-			List<HouseDeal>list=dao.searchAll();
+			List<HouseDeal> list = dao.searchAll();
 			return list;
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			throw new HappyHouseException("거래 정보를 조회중 오류가 발생했습니다.");
 		}
 	}
+
 	@Override
 	public HouseDeal searchHouseByNo(int no) {
 		try {
@@ -87,33 +92,29 @@ public class HouseServiceImpl implements HouseService{
 			throw new HappyHouseException("거래 정보를 조회중 오류가 발생했습니다.");
 		}
 	}
+
 	@Override
 	public List<HouseDeal> searchAll(int currentPage, int sizePerPage) throws SQLException {
 		return dao.searchAll(currentPage, sizePerPage);
 	}
+
 	@Override
 	public PageNavigation makePageNavigation(int currentPage, int sizePerPage) throws SQLException {
 		PageNavigation pageNavigation = new PageNavigation();
-		int naviSize = 10;//페이지 갯수
+		int naviSize = 10;// 페이지 갯수
 		pageNavigation.setCurrentPage(currentPage);
 		pageNavigation.setNaviSize(naviSize);
-		int totalCount = dao.getTotalCount();//총 개시글수
+		int totalCount = dao.getTotalCount();// 총 개시글수
 		System.out.println(totalCount);
 		pageNavigation.setTotalCount(totalCount);
-		int totalPageCount = (totalCount-1)/sizePerPage+1;//총 페이지수
+		int totalPageCount = (totalCount - 1) / sizePerPage + 1;// 총 페이지수
 		pageNavigation.setTotalPageCount(totalPageCount);
-		boolean startRange =currentPage<=naviSize ;//startRange true : 이전:X false: 이전 O
+		boolean startRange = currentPage <= naviSize;// startRange true : 이전:X false: 이전 O
 		pageNavigation.setStartRange(startRange);
-		boolean endRange = (totalPageCount-1)/naviSize*naviSize<currentPage;// endRange ture : 다음 X false : 다음 O
+		boolean endRange = (totalPageCount - 1) / naviSize * naviSize < currentPage;// endRange ture : 다음 X false : 다음 O
 		pageNavigation.setEndRange(endRange);
 		pageNavigation.makeNavigator();
 		return pageNavigation;
 	}
 
-
-
 }
-
-
-
-

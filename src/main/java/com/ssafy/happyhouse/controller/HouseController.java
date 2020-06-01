@@ -26,52 +26,55 @@ public class HouseController {
 		System.out.println("controller : detail()");
 		model.addAttribute("home", houseservice.searchHouseByNo(no));
 	}
-	
+
 	@PostMapping("/houselist")
 	public void houselistPost(Model model, String pg) throws SQLException {
 		System.out.println("controller : houselist()");
 		int currentPage = Integer.parseInt(pg);
 		int sizePerPage = 10; // 한 페이지에 보여줄 게시글 수 나중에 확인
-		List<HouseDeal>list = houseservice.searchAll(currentPage, sizePerPage);
-		System.out.println("type"+list.get(0).getType());
+		List<HouseDeal> list = houseservice.searchAll(currentPage, sizePerPage);
+		System.out.println("type" + list.get(0).getType());
 		model.addAttribute("List", list);
 		model.addAttribute("navigation", houseservice.makePageNavigation(currentPage, sizePerPage));
 	}
-	
+
 	@GetMapping("/houselist")
 	public void houselist(Model model, String pg) throws SQLException {
 		System.out.println("controller : houselist()");
 		int currentPage = Integer.parseInt(pg);
 		int sizePerPage = 10; // 한 페이지에 보여줄 게시글 수 나중에 확인
-		List<HouseDeal>list = houseservice.searchAll(currentPage, sizePerPage);
-		System.out.println("type"+list.get(0).getType());
-		
+		List<HouseDeal> list = houseservice.searchAll(currentPage, sizePerPage);
+		System.out.println("type" + list.get(0).getType());
+
 		model.addAttribute("List", list);
 		model.addAttribute("navigation", houseservice.makePageNavigation(currentPage, sizePerPage));
 	}
+
 	@PostMapping("/searchlist")
-	public String searchlist(String type1, String type2, String type3, String type4, String searchType, String searchWord, Model model) throws SQLException {
+	public String searchlist(String type1, String type2, String type3, String type4, String searchType,
+			String searchWord, Model model) throws SQLException {
 		System.out.println("controller : searchlist()");
-		String type[]=new String[5];
-		type[1]=type1;
-		type[2]=type2;
-		type[3]=type3;
-		type[4]=type4;
-		String searType=searchType;
-		String searWord=searchWord;
+		String type[] = new String[5];
+		type[1] = type1;
+		type[2] = type2;
+		type[3] = type3;
+		type[4] = type4;
+		String searType = searchType;
+		String searWord = searchWord;
 		SearchDto searchDto = new SearchDto();
 		searchDto.setType(type);
 		searchDto.setSearchType(searchType);
 		searchDto.setSearchWord(searWord);
 // 		-------- Dto 객체 세팅------------
-		List<HouseDeal>houselist = houseservice.searchAll(searchDto);
+		List<HouseDeal> houselist = houseservice.searchAll(searchDto);
 		model.addAttribute("List", houselist);
-		if(searType.equals("dong")) {
+		if (houselist == null) {}
+		else if (searType.equals("dong")) {
 			model.addAttribute("AoptionD", searType);
 			model.addAttribute("dongimg", houselist.get(0).getDong());
-		}else if(searType.equals("AptName")) {
-			model.addAttribute("Aptimg", houselist.get(0).getAptName());
+		} else if (searType.equals("AptName")) {
 			model.addAttribute("AoptionD", searType);
+			model.addAttribute("Aptimg", houselist.get(0).getAptName());
 		}
 		return "/house/houselist";
 	}
