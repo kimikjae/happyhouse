@@ -47,7 +47,7 @@ public class InterestLocationServiceImpl implements InterestLocationService {
 		InterestLocationService a = new InterestLocationServiceImpl();
 		Interestlocation location = new Interestlocation ();
 		location.setMemberno(1);
-		location.setDongcode(HouseDaoImpl.getDongCode("평동"));
+//		location.setDongcode(HouseDaoImpl.getDongCode("평동"));
 		
 		a.registLocation(location);
 		MemberDto temp = new MemberDto();

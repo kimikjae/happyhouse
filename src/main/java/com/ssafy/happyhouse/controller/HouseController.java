@@ -29,11 +29,9 @@ public class HouseController {
 
 	@PostMapping("/houselist")
 	public void houselistPost(Model model, String pg) throws SQLException {
-		System.out.println("controller : houselist()");
 		int currentPage = Integer.parseInt(pg);
 		int sizePerPage = 10; // 한 페이지에 보여줄 게시글 수 나중에 확인
 		List<HouseDeal> list = houseservice.searchAll(currentPage, sizePerPage);
-		System.out.println("type" + list.get(0).getType());
 		model.addAttribute("List", list);
 		model.addAttribute("navigation", houseservice.makePageNavigation(currentPage, sizePerPage));
 	}
@@ -44,7 +42,6 @@ public class HouseController {
 		int currentPage = Integer.parseInt(pg);
 		int sizePerPage = 10; // 한 페이지에 보여줄 게시글 수 나중에 확인
 		List<HouseDeal> list = houseservice.searchAll(currentPage, sizePerPage);
-		System.out.println("type" + list.get(0).getType());
 
 		model.addAttribute("List", list);
 		model.addAttribute("navigation", houseservice.makePageNavigation(currentPage, sizePerPage));
@@ -53,7 +50,6 @@ public class HouseController {
 	@PostMapping("/searchlist")
 	public String searchlist(String type1, String type2, String type3, String type4, String searchType,
 			String searchWord, Model model) throws SQLException {
-		System.out.println("controller : searchlist()");
 		String type[] = new String[5];
 		type[1] = type1;
 		type[2] = type2;
@@ -66,7 +62,7 @@ public class HouseController {
 		searchDto.setSearchType(searchType);
 		searchDto.setSearchWord(searWord);
 // 		-------- Dto 객체 세팅------------
-		List<HouseDeal> houselist = houseservice.searchAll(searchDto);
+		List<HouseDeal> houselist = houseservice.detaillist(searchDto);
 		model.addAttribute("List", houselist);
 		if (houselist == null) {}
 		else if (searType.equals("dong")) {

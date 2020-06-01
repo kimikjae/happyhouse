@@ -235,7 +235,7 @@ public class CommercialDataDAO {
 	public static void main(String[] args) {
 		CommercialDataDAO a = new CommercialDataDAO();
 		
-		a.search(HouseDaoImpl.getDongCode("평동")).forEach(System.out::println);
+//		a.search(HouseDaoImpl.getDongCode("평동")).forEach(System.out::println);
 		
 	}
 }
