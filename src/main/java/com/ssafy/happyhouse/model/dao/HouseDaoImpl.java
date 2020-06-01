@@ -11,14 +11,12 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import com.ssafy.happyhouse.model.dto.HouseDeal;
-import com.ssafy.happyhouse.model.dto.HouseInfo;
 import com.ssafy.happyhouse.model.dto.HousePageBean;
 import com.ssafy.happyhouse.model.dto.SearchDto;
 import com.ssafy.happyhouse.util.DBUtil;
 
 @Repository
 public class HouseDaoImpl implements HouseDao{
-	private Map<String, HouseInfo> houseInfo;
 	private Map<String, List<HouseDeal>> deals;
 	private int size;
 	private List<HouseDeal>search;
@@ -187,12 +185,16 @@ public class HouseDaoImpl implements HouseDao{
 			con = DBUtil.getConnection();
 			String sql = "select * from housedeal where 1 = 1 and (";
 			stmt = con.prepareStatement(sql);
+			System.out.println(searchDto);
+			System.out.println(searchDto.getType());
 			String[] type=searchDto.getType();
-			String option=searchDto.getOption();
+			String searchType=searchDto.getSearchType();
+			System.out.println("c");
 			String searchword=searchDto.getSearchWord();
 			int typecnt=0;
-			int optioncnt=0;
+			System.out.println("a");
 			for(int i=1;i<5;i++) {
+				System.out.println("b");
 				if(type[i]!=null&&typecnt==0) {
 					typecnt++;
 					sql=sql+"type = "+type[i];
@@ -200,22 +202,29 @@ public class HouseDaoImpl implements HouseDao{
 					typecnt++;
 					sql=sql+" or type ="+type[i];
 				}
+				System.out.println("dd");
 			}
+			System.out.println("ff");
 			sql=sql+" ) ";
-			if(option.equals("all")) {
+			if(searchType.equals("all")) {
 				sql = sql + " and (dong like ? or AptName like ? )";
 				stmt = con.prepareStatement(sql);
 				stmt.setString(1, "%"+searchword+"%");
 				stmt.setString(2, "%"+searchword+"%");
-			}else if(option.equals("dong")) {
+			}else if(searchType.equals("dong")) {
 				sql= sql + " and dong like ? ";
 				stmt = con.prepareStatement(sql);
 				stmt.setString(1, "%"+searchword+"%");
-			}else if(option.equals("AptName")) {
+			}else if(searchType.equals("AptName")) {
 				sql = sql+ " and AptName like ?";
 				stmt = con.prepareStatement(sql);
 				stmt.setString(1, "%"+searchword+"%");
 			}
+			System.out.println(sql);
+			System.out.println(sql);
+			System.out.println(sql);
+			System.out.println(sql);
+			System.out.println(sql);
 			System.out.println(sql);
 			rs = stmt.executeQuery();
 			List<HouseDeal> dealList = new LinkedList<>();
@@ -317,9 +326,8 @@ public class HouseDaoImpl implements HouseDao{
 		ResultSet rs = null;
 		try {
 			con = DBUtil.getConnection();
-			String sql = "select * from housedeal where 1 = 1 limit ? , ?";
+			String sql = "select * from housedeal where 1 = 1 limit ? , ? ";
 			stmt = con.prepareStatement(sql);
-			System.out.println(sql);
 			stmt.setInt(1, (currentPage - 1) * sizePerPage);
 			stmt.setInt(2, sizePerPage);
 			rs = stmt.executeQuery();

@@ -15,7 +15,7 @@ import javax.sql.DataSource;
  * 3. ClassLoader를 통해 직접 로딩. 
  */
 public class DBUtil {
-	static final String URL = "jdbc:mysql://syureu.iptime.org:19955/ssafydb?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8";
+	static final String URL = "jdbc:mysql://127.0.0.1:3306/ssafydb?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8";
 	static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 	static final String ID = "ssafy";
 	static final String PASSWORD = "ssafy";

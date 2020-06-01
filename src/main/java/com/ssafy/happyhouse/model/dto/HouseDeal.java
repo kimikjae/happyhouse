@@ -45,10 +45,6 @@ public class HouseDeal implements Serializable, Comparable<HouseDeal> {
 	
 	private String img;
 	public HouseDeal() {	}
-	public HouseDeal(int no) {
-		super();
-		this.no = no;
-	}
 //	public HouseDeal(String dong, String aptName, int code, String dealAmount, int buildYear, int dealYear, int dealMonth,
 //			int dealDay, double area, int floor, String jibun) {
 //		super();

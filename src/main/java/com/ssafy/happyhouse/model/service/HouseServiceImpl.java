@@ -37,7 +37,6 @@ public class HouseServiceImpl implements HouseService{
 			quicksort(list,0,list.size()-1);
 		}
 		return list;
-
 	}
 
 	private void quicksort(List<HouseDeal> list, int start, int end) {
