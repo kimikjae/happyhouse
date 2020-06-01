@@ -2,18 +2,20 @@ package com.ssafy.happyhouse.model.service;
 
 import java.sql.SQLException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.happyhouse.HappyHouseException;
 import com.ssafy.happyhouse.model.dao.MemberDao;
-import com.ssafy.happyhouse.model.dao.MemberDaoIpmI;
 import com.ssafy.happyhouse.model.dto.MemberDto;
+
 @Service
 public class MemberServiceIpmI implements MemberService {
+	@Autowired
 	private MemberDao dao;
-	public MemberServiceIpmI() {
-		dao = new MemberDaoIpmI();
-	}
+
+	
+	@Override
 	public void signup(MemberDto memberdto) {
 		try {
 			dao.insertMember(memberdto);
@@ -24,18 +26,20 @@ public class MemberServiceIpmI implements MemberService {
 	}
 
 	@Override
-	public MemberDto login(String id, String password) {
+	public MemberDto login(MemberDto memberDto) {
+		String id=memberDto.getId();
+		String password=memberDto.getPassword();
 		if(id == null || password == null) {
 			return null;
 		}
 		try {
-			return dao.login(id, password);
+			return dao.login(memberDto);
 
 		} catch (SQLException e) {
 			throw new HappyHouseException("login 오류 발생");
 		}
 	}
-
+	@Override
 	public void update(MemberDto member) {
 		try {
 			System.out.println("service update");

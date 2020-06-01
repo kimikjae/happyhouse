@@ -26,27 +26,27 @@
 			<table class="table table-hover table-primary">
 				<tr>
 					<td>아이디*</td>
-					<td>${loginUser.id }</td>
+					<td><input type="hidden" name="id" value="${loginUser.id }">${loginUser.id }</td>
 				</tr>
 				<tr>
 					<td>비밀번호*</td>
 					<td><input type="text" name="password"
-						placeholder="${loginUser.password }" /></td>
+						placeholder="${loginUser.password }" value="${loginUser.password }"/></td>
 				</tr>
 				<tr>
 					<td>이름*</td>
 					<td><input type="text" name="name"
-						placeholder="${loginUser.name }" /></td>
+						placeholder="${loginUser.name }" value="${loginUser.name }"/></td>
 				</tr>
 				<tr>
 					<td>주소*</td>
 					<td><input type="text" name="address1"
-						placeholder="${loginUser.address1 }" /></td>
+						placeholder="${loginUser.address1 }" value="${loginUser.address1 }"/></td>
 				</tr>
 				<tr>
 					<td>전화번호*</td>
 					<td><input type="text" name="phonenumber"
-						placeholder="${loginUser.phonenumber }" /></td>
+						placeholder="${loginUser.phonenumber }" value="${loginUser.phonenumber }" /></td>
 				</tr>
 			</table>
 			</div>

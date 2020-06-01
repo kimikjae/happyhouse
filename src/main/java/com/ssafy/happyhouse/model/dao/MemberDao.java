@@ -10,6 +10,6 @@ public interface MemberDao {
    public MemberDto searchMember(String id) throws SQLException;
    void updateMember(MemberDto member);
    void deleteMember(MemberDto member);
-   public MemberDto login(String id, String password) throws SQLException;
+   public MemberDto login(MemberDto memberDto) throws SQLException;
 
 }

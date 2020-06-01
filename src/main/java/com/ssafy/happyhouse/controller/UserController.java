@@ -31,7 +31,7 @@ public class UserController extends HttpServlet {
 	
 	@PostMapping("/login")
 	public String login(HttpSession httpSession, Model model, MemberDto memberDto) {
-		MemberDto loginTried = memberservice.login(memberDto.getId(), memberDto.getPassword());
+		MemberDto loginTried = memberservice.login(memberDto);
 		if(loginTried != null) {
 			httpSession.setAttribute("loginUser", loginTried);
 		} else {
@@ -72,9 +72,9 @@ public class UserController extends HttpServlet {
 	
 	@PostMapping("/modify")
 	public String modify(HttpSession httpSession, MemberDto memberDto) {
-		memberDto.setNo(((MemberDto)httpSession.getAttribute("loginUser")).getNo());
+		System.out.println("modify");
 		memberservice.update(memberDto);
-		httpSession.invalidate();
+		httpSession.setAttribute("loginUser", memberDto);
 		return "/index";
 	}
 	
