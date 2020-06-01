@@ -11,7 +11,7 @@
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css"
-	href=<c:url value="/notice/noticedetail.css"/> />
+	href=<c:url value="/resources/css/notice/noticedetail.css"/> />
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/header.jsp"%>
@@ -50,10 +50,10 @@
 	<div class="tableDiv">
 		<ul class="nav nav-fill nav-pills justify-content-center">
 			<li class="nav-item li-padding"><a class="nav-link active"
-				href="<c:url value="/notice.do?act=noticelist&key=&value="/>">
+				href="<c:url value="/notice/noticelist"/>">
 					공지목록으로 돌아가기 </a></li>
 			<li class="nav-item li-padding"><a class="nav-link active"
-				href="<c:url value="/notice.do?act=noticedelete&noticeno=${notice.noticeno}"/>">
+				href="<c:url value="/notice/noticedelete?noticeno=${notice.noticeno}"/>">
 					공지삭제 </a></li>
 			<li class="nav-item"><a class="nav-link active"
 				href="<c:url value="/notice.do?act=updateForm"/>"> 공지수정 </a></li>

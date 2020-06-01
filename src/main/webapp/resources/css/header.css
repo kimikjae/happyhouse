@@ -1,5 +1,5 @@
 .background {
-	background-image: url('resources/images/background.png');
+	background-image: url('/ssafy/resources/images/background.png');
 	background-position: 50% 32%;
 	min-height: 250px;
 }

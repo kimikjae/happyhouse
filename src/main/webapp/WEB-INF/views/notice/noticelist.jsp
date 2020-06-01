@@ -23,7 +23,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href=<c:url value="/notice/noticelist.css"/> />
+<link rel="stylesheet" type="text/css" href=<c:url value="/resources/css/notice/noticelist.css"/> />
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/header.jsp"%>
@@ -46,7 +46,7 @@
 								<tr>
 									<td>${notice.noticeno}</td>
 									<td><a
-										href="<c:url value="/notice.do?act=detail&noticeno=${notice.noticeno}"/>">${notice.subject}</a>
+										href="<c:url value="/notice/noticedetail?noticeno=${notice.noticeno}"/>">${notice.subject}</a>
 									</td>
 									<td>${notice.name}</td>
 									<td>${notice.uploaddate}</td>

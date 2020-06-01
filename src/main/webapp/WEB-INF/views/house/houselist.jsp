@@ -24,31 +24,29 @@ function search() {
 			 $('input:checkbox[name="type2"]').is(":checked") ==  true ||
 			 $('input:checkbox[name="type3"]').is(":checked") ==  true ||
 			 $('input:checkbox[name="type4"]').is(":checked") ==  true  ){
-		document.getElementById("searchform").action = "<c:url value="/house.do?act=detaillist"/>";
+		document.getElementById("searchform").action = "<c:url value="/house/detaillist"/>"
 		document.getElementById("searchform").submit();
 	}else
 			alert("검색 타입을 선택 하셔야합니다.");
 }
 function pageMove(pg) { 
 	document.getElementById("pg").value=pg;
-	document.getElementById("pageform").action = "<c:url value="/house.do"/>";
+	document.getElementById("pageform").action = "<c:url value="/house/houselist"/>";
 	document.getElementById("pageform").submit();
 }
 </script>
 <link rel="stylesheet" type="text/css"
-	href=<c:url value="/house/houselist.css"/> />
+	href=<c:url value="/resources/css/house/houselist.css"/> />
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/header.jsp"%>
 	<form name="pageform" id="pageform" method="GET" action="">
-		<input type="hidden" name="act" id="act" value="houselist"> <input
-			type="hidden" name="pg" id="pg" value="">
+		<input type="hidden" name="pg" id="pg" value="">
 	</form>
 	<h1 id="mainWindow" align="center">전체 검색 화면</h1>
 	<form id="searchform" method="post"
 		action="<c:url value="/house/detaillist"/>">
-		<input type="hidden" name="act" value="detaillist" /> <input
-			type="hidden" name="pg" value="1" />
+		<input type="hidden" name="pg" value="1" />
 		<div align="left">
 			<label> <input type="checkbox" name="type1" value="1">
 				아파트 매매

@@ -10,11 +10,12 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="header.css" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/header.css"/>" />
 </head>
 <body>
 	<div class="headerDiv" align="center">
-		<h1>Happy House</h1>
+		<a href="<c:url value="/"/>"><h1>Happy House</h1></a>
 		<c:choose>
 			<c:when test="${empty loginUser}">
 				<br>
@@ -70,17 +71,16 @@
 			<nav>
 				<ul class="nav nav-fill nav-pills justify-content-center">
 					<li class="nav-item"><a class="nav-link active"
-						href="<c:url value="/notice.do?act=noticelist&key=&word="/>">
-							공지사항 </a></li>
+						href="<c:url value="/notice/noticelist"/>"> 공지사항 </a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value=""/>"> 오늘의 뉴스 </a></li>
+						href="<c:url value="#"/>"> 오늘의 뉴스 </a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="<c:url value=""/>"> 주변탐방 </a></li>
+						href="<c:url value="#"/>"> 주변탐방 </a></li>
 					<c:if test="${loginUser.id != null}">
 						<li class="nav-item"><a class="nav-link"
-							href="<c:url value=""/>"> 관심지역설정 </a></li>
+							href="<c:url value="#"/>"> 관심지역설정 </a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="<c:url value=""/>"> 관심지역둘러보기 </a></li>
+							href="<c:url value="#"/>"> 관심지역둘러보기 </a></li>
 					</c:if>
 				</ul>
 			</nav>

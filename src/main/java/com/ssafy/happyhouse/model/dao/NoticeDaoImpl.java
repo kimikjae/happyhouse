@@ -1,20 +1,20 @@
 package com.ssafy.happyhouse.model.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.ssafy.happyhouse.model.dto.NoticeDto;
 import com.ssafy.happyhouse.util.DBUtil;
 
+@Repository
 public class NoticeDaoImpl implements NoticeDao {
-
-
-
+	
 	@Override
 	public List<NoticeDto> listArticle(String key, String word) throws SQLException {
 		List<NoticeDto> list = new ArrayList<NoticeDto>();

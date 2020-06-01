@@ -15,10 +15,10 @@
 		$(this).hasClass('start-fun')
 			? $(this).text('stop the fun')
 			: $(this).text('start the fun');
-		});
+	});
 </script>
 <link rel="stylesheet" type="text/css"
-	href=<c:url value="/house/housemain.css"/> />
+	href=<c:url value="/resources/css/house/housemain.css"/> />
 </head>
 <body>
 	<form method="post" action="<c:url value="/house/houselist"/>">

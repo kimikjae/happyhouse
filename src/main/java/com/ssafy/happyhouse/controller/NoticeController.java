@@ -5,37 +5,67 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.mysql.cj.protocol.x.Notice;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.ssafy.happyhouse.model.dto.MemberDto;
 import com.ssafy.happyhouse.model.dto.NoticeDto;
+import com.ssafy.happyhouse.model.dto.NoticeSearchDto;
 import com.ssafy.happyhouse.model.service.NoticeService;
-import com.ssafy.happyhouse.model.service.NoticeServiceImpl;
 
-@WebServlet("/notice.do")
-public class NoticeController extends HttpServlet {
-
-	private static final long serialVersionUID = 1L;
+@RequestMapping("/notice")
+@Controller
+public class NoticeController {
+	
+	@Autowired
 	private NoticeService noticeService;
-
-	public NoticeController() {
-		noticeService = new NoticeServiceImpl();
+	
+	@GetMapping("/noticelist")
+	public void noticelist(Model model, NoticeSearchDto noticeSearchDto) throws Exception {
+		model.addAttribute("notices", noticeService.listArticle(noticeSearchDto.getKey(), noticeSearchDto.getWord()));
 	}
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		process(request, response);
+	
+	@GetMapping("/noticedetail")
+	public void noticedetail(Model model, int noticeno) throws Exception {
+		model.addAttribute("notice", noticeService.selectNoticeByNoticeNo(noticeno));
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		process(request, response);
+	
+	@GetMapping("/noticedelete")
+	public String noticedelete(int noticeno) throws Exception {
+		noticeService.deleteenotice(noticeno);
+		return "redirect:/notice/noticelist";
+	}
+	
+	private String noticedelete(HttpServletRequest request, HttpServletResponse response)throws Exception {
+		int noticeno=Integer.parseInt(request.getParameter("noticeno"));
+		noticeService.deleteenotice(noticeno);
+		System.out.println(noticeno);
+		return "redirect:/notice.do?act=noticelist&key=&word=";
+	}
+	
+	private String noticedetail(HttpServletRequest request, HttpServletResponse response)throws Exception {
+		int noticeno=Integer.parseInt(request.getParameter("noticeno"));
+		System.out.println(noticeno);
+		NoticeDto noticeDto=noticeService.selectNoticeByNoticeNo(noticeno);
+		//request.setAttribute("notice", noticeDto);
+		HttpSession session = request.getSession();
+		session.setAttribute("notice", noticeDto);
+		return "/notice/noticedetail.jsp";
+	}
+	
+	private String noticelist(HttpServletRequest request, HttpServletResponse response) throws Exception {	
+		String key = request.getParameter("key");
+		String word = request.getParameter("word");
+		List<NoticeDto> list = noticeService.listArticle(key, word);
+		request.setAttribute("notices", list);	
+		return "/notice/noticelist.jsp";
 	}
 
 	private void process(HttpServletRequest request, HttpServletResponse response)
@@ -80,13 +110,6 @@ public class NoticeController extends HttpServlet {
 		rd.forward(request, response);
 	}
 
-	private String noticedelete(HttpServletRequest request, HttpServletResponse response)throws Exception {
-		int noticeno=Integer.parseInt(request.getParameter("noticeno"));
-		noticeService.deleteenotice(noticeno);
-		System.out.println(noticeno);
-		return "redirect:/notice.do?act=noticelist&key=&word=";
-	}
-
 	private String update(HttpServletRequest request, HttpServletResponse response)throws Exception  {
 		HttpSession session =request.getSession();	
 		NoticeDto n =((NoticeDto)session.getAttribute("notice"));
@@ -105,18 +128,7 @@ public class NoticeController extends HttpServlet {
 		return "/notice/noticeupdate.jsp";
 	}
 
-	private String noticedetail(HttpServletRequest request, HttpServletResponse response)throws Exception {
-		int noticeno=Integer.parseInt(request.getParameter("noticeno"));
-		System.out.println(noticeno);
-		NoticeDto noticeDto=noticeService.selectNoticeByNoticeNo(noticeno);
-		//request.setAttribute("notice", noticeDto);
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("notice", noticeDto);
-		
-		
-		return "/notice/noticedetail.jsp";
-	}
+
 
 	private String noticewrite(HttpServletRequest request, HttpServletResponse response)throws Exception {
 		
@@ -138,12 +150,5 @@ public class NoticeController extends HttpServlet {
 	}
 
 	
-	private String noticelist(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		String key = request.getParameter("key");
-		String word = request.getParameter("word");
-		List<NoticeDto> list = noticeService.listArticle(key, word);
-		request.setAttribute("notices", list);	
-		return "/notice/noticelist.jsp";
-	}
+
 }

@@ -62,10 +62,10 @@
 		</tr>
 	</table>
 	<div>
-		<img src="./img/${home.aptName}.jpg" alt="해당 집의 사진" /> <img
-			src="./img/${home.aptName}.jfif" />
+		<img src="<c:url value="/resources/img/${home.aptName}.jpg"/>" alt="해당 집의 사진" /> <img
+			src="<c:url value="/resources/img/${home.aptName}.jfif"/>" />
 	</div>
-	<form method="post" action="<c:url value="/house.do"/>">
+	<form method="post" action="<c:url value="/house/houselist"/>">
 		<input type="hidden" name="act" value="houselist" /> <input
 			type="hidden" name="pg" value="1" />
 		<button class="btn btn-secondary">목록으로 돌아가기</button>
