@@ -19,21 +19,22 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-function search() {
-	if(		 $('input:checkbox[name="type1"]').is(":checked") ==  true || 
-			 $('input:checkbox[name="type2"]').is(":checked") ==  true ||
-			 $('input:checkbox[name="type3"]').is(":checked") ==  true ||
-			 $('input:checkbox[name="type4"]').is(":checked") ==  true  ){
-		document.getElementById("searchform").action = "<c:url value="/house/detaillist"/>"
-		document.getElementById("searchform").submit();
-	}else
+	function search() {
+		if ($('input:checkbox[name="type1"]').is(":checked") == true
+				|| $('input:checkbox[name="type2"]').is(":checked") == true
+				|| $('input:checkbox[name="type3"]').is(":checked") == true
+				|| $('input:checkbox[name="type4"]').is(":checked") == true) {
+
+			document.getElementById("searchform").action = "<c:url value="/house/searchlist"/>";
+			document.getElementById("searchform").submit();
+		} else
 			alert("검색 타입을 선택 하셔야합니다.");
-}
-function pageMove(pg) { 
-	document.getElementById("pg").value=pg;
-	document.getElementById("pageform").action = "<c:url value="/house/houselist"/>";
-	document.getElementById("pageform").submit();
-}
+	}
+	function pageMove(pg) {
+		document.getElementById("pg").value = pg;
+		document.getElementById("pageform").action = "<c:url value="/house/houselist"/>";
+		document.getElementById("pageform").submit();
+	}
 </script>
 <link rel="stylesheet" type="text/css"
 	href=<c:url value="/resources/css/house/houselist.css"/> />
@@ -45,7 +46,7 @@ function pageMove(pg) {
 	</form>
 	<h1 id="mainWindow" align="center">전체 검색 화면</h1>
 	<form id="searchform" method="post"
-		action="<c:url value="/house/detaillist"/>">
+		action="<c:url value="/house/searchlist"/>">
 		<input type="hidden" name="pg" value="1" />
 		<div align="left">
 			<label> <input type="checkbox" name="type1" value="1">
@@ -56,7 +57,7 @@ function pageMove(pg) {
 				name="type4" value="4"> 연립 다세대 전월세</label>
 		</div>
 		<div align="right">
-			<select name="searchType" id="searchType">
+			<select name="searchType" id="searchType" name="searchType">
 				<option value="all">동/아파트</option>
 				<option value="dong">동</option>
 				<option value="AptName">아파트</option>
