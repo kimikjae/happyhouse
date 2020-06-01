@@ -8,12 +8,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import com.ssafy.happyhouse.model.dto.HouseDeal;
 import com.ssafy.happyhouse.model.dto.HouseInfo;
 import com.ssafy.happyhouse.model.dto.HousePageBean;
 import com.ssafy.happyhouse.model.dto.SearchDto;
 import com.ssafy.happyhouse.util.DBUtil;
 
+@Repository
 public class HouseDaoImpl implements HouseDao{
 	private Map<String, HouseInfo> houseInfo;
 	private Map<String, List<HouseDeal>> deals;

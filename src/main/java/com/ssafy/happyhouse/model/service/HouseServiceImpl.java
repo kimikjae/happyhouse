@@ -4,20 +4,21 @@ import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.ssafy.happyhouse.HappyHouseException;
 import com.ssafy.happyhouse.model.dao.HouseDao;
-import com.ssafy.happyhouse.model.dao.HouseDaoImpl;
 import com.ssafy.happyhouse.model.dto.HouseDeal;
-import com.ssafy.happyhouse.model.dto.HousePageBean;
 import com.ssafy.happyhouse.model.dto.SearchDto;
 import com.ssafy.happyhouse.util.PageNavigation;
 
+@Service
 public class HouseServiceImpl implements HouseService{
+	
+	@Autowired
 	private HouseDao dao;
 
-	public HouseServiceImpl() {
-		dao =new HouseDaoImpl();
-	}
 	/**
 	 * 검색 조건(key) 검색 단어(word)에 해당하는 아파트 거래 정보(HouseInfo)를  검색해서 반환.  
 	 * @param bean  검색 조건과 검색 단어가 있는 객체
