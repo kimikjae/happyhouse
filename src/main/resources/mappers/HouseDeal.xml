@@ -46,7 +46,7 @@
 			<if test='searchType.equals("AptName")'>
 			 AptName like CONCAT('%',#{searchWord},'%')
 			</if>
-			
+			<if test="word!=null"></if>
 			
 	</select>
 </mapper>    
