@@ -14,6 +14,11 @@
 	href="<c:url value="/resources/css/header.css"/>" />
 </head>
 <body>
+<script type="text/javascript">
+	function movewrite() {
+		location.href = "${root}/notice.do?act=writeForm";
+	}
+</script>
 	<div class="headerDiv" align="center">
 		<a href="<c:url value="/"/>"><h1>Happy House</h1></a>
 		<c:choose>
@@ -77,6 +82,8 @@
 							href="<c:url value="#"/>"> 관심지역설정 </a></li>
 						<li class="nav-item"><a class="nav-link"
 							href="<c:url value="#"/>"> 관심지역둘러보기 </a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="<c:url value="/house/qna"/>"> QnA게시판 </a></li>
 					</c:if>
 				</ul>
 			</nav>

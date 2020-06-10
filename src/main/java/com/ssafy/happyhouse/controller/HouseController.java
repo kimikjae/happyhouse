@@ -26,7 +26,11 @@ public class HouseController {
 		System.out.println("controller : detail()");
 		model.addAttribute("home", houseservice.searchHouseByNo(no));
 	}
-
+	@GetMapping("/qna")
+	public String qna() {
+		System.out.println("qna");
+		return "/qna";
+	}
 	@PostMapping("/houselist")
 	public void houselistPost(Model model, String pg) throws SQLException {
 		int currentPage = Integer.parseInt(pg);
