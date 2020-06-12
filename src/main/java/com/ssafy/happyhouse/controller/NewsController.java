@@ -19,10 +19,10 @@ public class NewsController {
 	@Autowired
 	private NewsService newsService;
 	
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/newslist", method = RequestMethod.GET)
 	public String list(Model model) throws IOException {
 		List<NewsDto> list = newsService.retrieveNews();
 		model.addAttribute("list",list);
-		return "news/list";	
+		return "news/newslist";	
 	}
 }
