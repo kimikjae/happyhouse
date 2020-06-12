@@ -1,0 +1,21 @@
+#container {
+		position:absolute;
+		top:30%;
+		left:43%;
+		width: 300px;
+		height: 300px;
+		text-align:center;
+		border : 3px solid black;
+}
+h3{
+	color: red
+}
+body{
+	text-align: center
+}
+table{
+	margin: auto
+}
+td,th{
+	padding: 3px
+}
