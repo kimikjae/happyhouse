@@ -15,7 +15,7 @@
 </head>
 <body>
 <div id = "container">
-  <h3>News 목록</h3> 
+  <h3>News 목록</h3>
   <hr>
   <form>
     <table border="1">
