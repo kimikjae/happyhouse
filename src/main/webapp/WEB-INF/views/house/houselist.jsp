@@ -47,15 +47,6 @@
 	<h1 id="mainWindow" align="center">전체 검색 화면</h1>
 	<form id="searchform" method="post"
 		action="<c:url value="/house/searchlist"/>">
-		<input type="hidden" name="pg" value="1" />
-		<div align="left">
-			<label> <input type="checkbox" name="type1" value="1">
-				아파트 매매
-			</label> <label><input type="checkbox" name="type2" value="2">
-				연립 다세대 매매</label> <label><input type="checkbox" name="type3"
-				value="3"> 아파트 전월세</label> <label><input type="checkbox"
-				name="type4" value="4"> 연립 다세대 전월세</label>
-		</div>
 		<div align="right">
 			<select id="searchType" name="searchType">
 				<option value="all">동/아파트</option>
@@ -73,8 +64,6 @@
 					<th>번호</th>
 					<th>동</th>
 					<th>아파트이름</th>
-					<th>거래금액</th>
-					<th>거래종류</th>
 				</tr>
 			</thead>
 			<c:if test="${List eq 'Empty'}">
@@ -89,19 +78,7 @@
 						<td><a
 							href="<c:url value="/house/housedetail?no=${house.no}"/>">${house.aptName}</a>
 						</td>
-						<td>${house.dealAmount}</td>
-						<c:if test="${house.type eq '1'}">
-							<td>아파트 매매</td>
-						</c:if>
-						<c:if test="${house.type eq '2'}">
-							<td>연립 다세대 매매</td>
-						</c:if>
-						<c:if test="${house.type eq '3'}">
-							<td>아파트 전월세</td>
-						</c:if>
-						<c:if test="${house.type eq '4'}">
-							<td>연립 다세대 전월세</td>
-						</c:if>
+
 					</tr>
 				</c:forEach>
 			</c:if>

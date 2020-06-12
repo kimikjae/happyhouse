@@ -10,7 +10,7 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <link rel=icon href=/favicon.ico>
 <title>happyhouseapi</title>
-<link href=../js/app.641e5130.js rel=preload as=script>
+<link href=../js/app.febab61e.js rel=preload as=script>
 <link href=../js/chunk-vendors.39500b71.js rel=preload as=script>
 </head>
 <body>
@@ -18,7 +18,7 @@
 		<strong>We're sorry but happyhouseapi doesn't work properly
 			without JavaScript enabled. Please enable it to continue.</strong>
 	</noscript>
-<style>
+	<style>
 .router-link-exact-active {
 	color: red;
 }
@@ -31,8 +31,10 @@
 		href=https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css
 		integrity=sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh
 		crossorigin=anonymous>
+		<link rel="stylesheet" type="text/css" href=<c:url value="/resources/css/QnA/qnalist.css"/> />
+	<%@ include file="/WEB-INF/views/header.jsp"%>
 	<div id=app></div>
 	<script src=../js/chunk-vendors.39500b71.js></script>
-	<script src=../js/app.641e5130.js></script>
+	<script src=../js/app.febab61e.js></script>
 </body>
 </html>
