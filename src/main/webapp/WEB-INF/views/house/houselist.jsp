@@ -57,7 +57,7 @@
 				name="type4" value="4"> 연립 다세대 전월세</label>
 		</div>
 		<div align="right">
-			<select name="searchType" id="searchType" name="searchType">
+			<select id="searchType" name="searchType">
 				<option value="all">동/아파트</option>
 				<option value="dong">동</option>
 				<option value="AptName">아파트</option>
