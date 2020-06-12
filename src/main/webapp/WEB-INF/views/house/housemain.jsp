@@ -6,33 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-	$('#btn').on('click', function(event) {
-		$(this).toggleClass('start-fun');
-		var $page = $('.page');
-		$page.toggleClass('color-bg-start').toggleClass('bg-animate-color');
-		//change text when when button is clicked
-		$(this).hasClass('start-fun')
-			? $(this).text('stop the fun')
-			: $(this).text('start the fun');
-	});
-</script>
+
 <link rel="stylesheet" type="text/css"
 	href=<c:url value="/resources/css/house/housemain.css"/> />
 </head>
 <body>
-<<<<<<< HEAD
-	
-	<a href="news/list">뉴스 목록</a>
-=======
-	<form method="post" action="<c:url value="/house/houselist"/>">
-		<input type="hidden" name="pg" value="1" />
-		<div class="page">
 
-			<button class="fun-btn">아파트 검색</button>
-
-		</div>
-	</form>
->>>>>>> branch 'master' of https://lab.ssafy.com/micael0919/happyhouse6.git
 </body>
 </html>

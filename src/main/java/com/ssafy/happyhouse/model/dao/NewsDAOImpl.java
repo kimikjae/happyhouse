@@ -58,9 +58,6 @@ private static String URL = "https://search.naver.com/search.naver?sm=tab_hty.to
 			list.add(tmp);
 			i++;
 		}
-		for(NewsDto dto : list) {
-			System.out.println(dto.toString());
-		}
 		return list;
 	}
 
