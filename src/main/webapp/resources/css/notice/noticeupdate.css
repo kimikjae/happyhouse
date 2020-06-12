@@ -2,3 +2,9 @@
 	margin: auto;
 	width: 50%;
 }
+#notice{
+	background-color: #1E90FF;
+}
+#noticetext{
+	color:#ffffff;
+}

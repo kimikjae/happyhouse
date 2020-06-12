@@ -18,7 +18,7 @@
 		<strong>We're sorry but happyhouseapi doesn't work properly
 			without JavaScript enabled. Please enable it to continue.</strong>
 	</noscript>
-	<style>
+<style>
 .router-link-exact-active {
 	color: red;
 }

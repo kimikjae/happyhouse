@@ -11,7 +11,7 @@
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css"
-	href=<c:url value="/notice/noticeupdate.css"/> />
+	href=<c:url value="/resources/css/notice/noticeupdate.css"/> />
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/header.jsp"%>

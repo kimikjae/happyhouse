@@ -5,3 +5,9 @@
 .li-padding {
 	padding-right: 10px;
 }
+#notice{
+	background-color: #1E90FF;
+}
+#noticetext{
+	color:#ffffff;
+}
