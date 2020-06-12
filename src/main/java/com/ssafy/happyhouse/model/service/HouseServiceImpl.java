@@ -26,9 +26,8 @@ public class HouseServiceImpl implements HouseService {
     * @param bean 검색 조건과 검색 단어가 있는 객체
     * @return 조회한 식품 목록
     */
-   public List<HouseDeal> detaillist(SearchDto searchDto) throws SQLException {
-      System.err.println("service");
-      List<HouseDeal> list = dao.detaillist(searchDto);
+   public List<HouseDeal> detaillist(String searchWord) throws SQLException {
+      List<HouseDeal> list = dao.detaillist(searchWord);
       // 정렬 알고리즘 -->퀵
       if (list.size() != 0) {
          for (int i = 0; i < list.size(); i++) {

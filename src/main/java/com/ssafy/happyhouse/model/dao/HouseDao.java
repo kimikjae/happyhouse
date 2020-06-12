@@ -12,5 +12,5 @@ public interface HouseDao {
    public HouseDeal searchByNo(int no); //
    public int getTotalCount() throws SQLException; // 
    public List<HouseDeal> searchAll(Pair pa); // 
-   public List<HouseDeal> detaillist(SearchDto searchDto) throws SQLException;
+   public List<HouseDeal>detaillist(String searchWord) throws SQLException;
 }

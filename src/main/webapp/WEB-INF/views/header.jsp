@@ -14,11 +14,11 @@
 	href="<c:url value="/resources/css/header.css"/>" />
 </head>
 <body>
-<script type="text/javascript">
-	function movewrite() {
-		location.href = "${root}/notice.do?act=writeForm";
-	}
-</script>
+	<script type="text/javascript">
+		function movewrite() {
+			location.href = "${root}/notice.do?act=writeForm";
+		}
+	</script>
 	<div class="headerDiv" align="center">
 		<a href="<c:url value="/"/>"><h1>Happy House</h1></a>
 		<c:choose>
@@ -29,7 +29,8 @@
 						<tbody>
 							<tr>
 								<td>
-									<form method="post" action="<c:url value="/user/registerform"/>">
+									<form method="post"
+										action="<c:url value="/user/registerform"/>">
 										<button class="btn btn-primary">회원 가입</button>
 									</form>
 								</td>
@@ -71,23 +72,44 @@
 		<div id="body">
 			<nav>
 				<ul class="nav nav-fill nav-pills justify-content-center">
-					<li class="nav-item" id="notice"><a class="nav-link" id="noticetext"
-						href="<c:url value="/notice/noticelist"/>"> 공지사항 </a></li>
-					<li class="nav-item" id="news"><a class="nav-link" id="newstext"
-						href="<c:url value="#"/>"> 오늘의 뉴스 </a></li>
-					<li class="nav-item" id="surround"><a class="nav-link" id="surroundtext"
-						href="<c:url value="#"/>"> 주변탐방 </a></li>
+					<li class="nav-item" id="notice"><a class="nav-link"
+						id="noticetext" href="<c:url value="/notice/noticelist"/>">
+							공지사항 </a></li>
+					<li class="nav-item" id="news"><a class="nav-link"
+						id="newstext" href="<c:url value="#"/>"> 오늘의 뉴스 </a></li>
+					<li class="nav-item" id="surround"><a class="nav-link"
+						id="surroundtext" href="<c:url value="#"/>"> 주변탐방 </a></li>
 					<c:if test="${loginUser.id != null}">
-						<li class="nav-item"  id="like"><a class="nav-link" id="liketext"
-							href="<c:url value="#"/>"> 관심지역설정 </a></li>
-						<li class="nav-item" id="likesurrond"><a class="nav-link" id="likesurrondtext"
-							href="<c:url value="#"/>"> 관심지역둘러보기 </a></li>
-						<li class="nav-item" id="qna"><a class="nav-link" id="qnatext"
-							href="<c:url value="/house/qna"/>"> QnA게시판 </a></li>
+						<li class="nav-item" id="like"><a class="nav-link"
+							id="liketext" href="<c:url value="#"/>"> 관심지역설정 </a></li>
+						<li class="nav-item" id="likesurrond"><a class="nav-link"
+							id="likesurrondtext" href="<c:url value="#"/>"> 관심지역둘러보기 </a></li>
+						<li class="nav-item" id="qna"><a class="nav-link"
+							id="qnatext" href="<c:url value="/house/qna"/>"> QnA게시판 </a></li>
+						<li class="nav-item"id="apart"><form method="post" action="<c:url value="/house/houselist"/>">
+							<input type="hidden" name="pg" value="1" />
+							<div class="page">
+								<button id="butn" class="fun-btn">아파트검색</button>
+							</div>
+						</form></li>
 					</c:if>
 				</ul>
 			</nav>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$('#btn').on(
+				'click',
+				function(event) {
+					$(this).toggleClass('start-fun');
+					var $page = $('.page');
+					$page.toggleClass('color-bg-start').toggleClass(
+							'bg-animate-color');
+					//change text when when button is clicked
+					$(this).hasClass('start-fun') ? $(this)
+							.text('stop the fun') : $(this).text(
+							'start the fun');
+				});
+	</script>
 </body>
 </html>

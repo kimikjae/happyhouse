@@ -21,14 +21,7 @@
 	href=<c:url value="/resources/css/house/housemain.css"/> />
 </head>
 <body>
-	<form method="post" action="<c:url value="/house/houselist"/>">
-		<input type="hidden" name="pg" value="1" />
-		<div class="page">
-
-			<button class="fun-btn">아파트 검색</button>
-
-		</div>
-	</form>
+	
 	<a href="news/list">뉴스 목록</a>
 </body>
 </html>

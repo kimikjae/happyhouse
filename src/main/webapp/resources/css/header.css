@@ -16,3 +16,9 @@
 #body {
 	min-width: 600px;
 }
+#butn{
+	margin-top:5px;
+	border: 1px solid white;
+	background-color: rgba(0,0,0,0);
+	color: #007bff;
+}

@@ -41,14 +41,9 @@ public class HouseDaoImpl implements HouseDao{
 	public int getTotalCount() {
 		return sqlSession.selectOne(NS + "getTotalCount");
 	}
-	public List<HouseDeal>detaillist(SearchDto searchDto){
-		Search2Dto temp = new Search2Dto();	
-		String searchType=searchDto.getSearchType();
-		String searchword =searchDto.getSearchWord();
+	public List<HouseDeal>detaillist(String searchWord){
 
-		temp.setSearchType(searchType);
-		temp.setSearchWord(searchword);
-		return sqlSession.selectList(NS + "detaillist", temp);
+		return sqlSession.selectList(NS + "detaillist", searchWord);
 	}
 }
 

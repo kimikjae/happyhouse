@@ -1,4 +1,4 @@
-.page {
+/* .page {
   width: 100vw;
   height: 50vh;
   display: flex;
@@ -6,24 +6,24 @@
 }
 
 
-/* add default color for animation start  */
+add default color for animation start 
 
 
-/* toggle this class */
+toggle this class
 
 .color-bg-start {
   background-color: salmon;
 }
 
 
-/* toggle class bg-animate-color */
+toggle class bg-animate-color
 
 .bg-animate-color {
   animation: random-bg .5s linear infinite;
 }
 
 
-/* add animation to bg color  */
+add animation to bg color 
 
 @keyframes random-bg {
   from {
@@ -35,7 +35,7 @@
 }
 
 .fun-btn {
-  /* change bg color to get different hues    */
+  change bg color to get different hues   
   width : 250px;
   height : 250px;
   background-color: salmon;
@@ -59,11 +59,11 @@
 
 .start-fun {
   background-color: #fff !important;
-  /* change color of button text when fun is started   */
+  change color of button text when fun is started  
   color: salmon !important;
 }
 
-/* pulsating effect on button */
+pulsating effect on button
 @keyframes grow {
   0% {
     transform: scale(1);
@@ -80,4 +80,4 @@
   70% {
     transform: scale(1);
   }
-}
+} */
