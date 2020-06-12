@@ -79,6 +79,20 @@
 						id="newstext" href="<c:url value="#"/>"> 오늘의 뉴스 </a></li>
 					<li class="nav-item" id="surround"><a class="nav-link"
 						id="surroundtext" href="<c:url value="#"/>"> 주변탐방 </a></li>
+					<li class="nav-item" id="notice"><a class="nav-link"
+						id="noticetext" href="<c:url value="/notice/noticelist"/>">
+							공지사항 </a></li>
+					<li class="nav-item" id="news"><a class="nav-link"
+						id="newstext" href="<c:url value="/news/newslist"/>"> 오늘의 뉴스 </a></li>
+					<li class="nav-item" id="surround"><a class="nav-link"
+						id="surroundtext" href="<c:url value="#"/>"> 주변탐방 </a></li>
+					<li class="nav-item" id="notice"><a class="nav-link"
+						id="noticetext" href="<c:url value="/notice/noticelist"/>">
+							공지사항 </a></li>
+					<li class="nav-item" id="news"><a class="nav-link"
+						id="newstext" href="<c:url value="/news/newslist"/>"> 오늘의 뉴스 </a></li>
+					<li class="nav-item" id="surround"><a class="nav-link"
+						id="surroundtext" href="<c:url value="#"/>"> 주변탐방 </a></li>
 					<c:if test="${loginUser.id != null}">
 						<li class="nav-item" id="like"><a class="nav-link"
 							id="liketext" href="<c:url value="#"/>"> 관심지역설정 </a></li>
@@ -86,12 +100,13 @@
 							id="likesurrondtext" href="<c:url value="#"/>"> 관심지역둘러보기 </a></li>
 						<li class="nav-item" id="qna"><a class="nav-link"
 							id="qnatext" href="<c:url value="/house/qna"/>"> QnA게시판 </a></li>
-						<li class="nav-item"id="apart"><form method="post" action="<c:url value="/house/houselist"/>">
-							<input type="hidden" name="pg" value="1" />
-							<div class="page">
-								<button id="butn" class="fun-btn">아파트검색</button>
-							</div>
-						</form></li>
+						<li class="nav-item" id="apart"><form method="post"
+								action="<c:url value="/house/houselist"/>">
+								<input type="hidden" name="pg" value="1" />
+								<div class="page">
+									<button id="butn" class="fun-btn">아파트검색</button>
+								</div>
+							</form></li>
 					</c:if>
 				</ul>
 			</nav>

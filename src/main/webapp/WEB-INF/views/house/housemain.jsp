@@ -21,7 +21,18 @@
 	href=<c:url value="/resources/css/house/housemain.css"/> />
 </head>
 <body>
+<<<<<<< HEAD
 	
 	<a href="news/list">뉴스 목록</a>
+=======
+	<form method="post" action="<c:url value="/house/houselist"/>">
+		<input type="hidden" name="pg" value="1" />
+		<div class="page">
+
+			<button class="fun-btn">아파트 검색</button>
+
+		</div>
+	</form>
+>>>>>>> branch 'master' of https://lab.ssafy.com/micael0919/happyhouse6.git
 </body>
 </html>
