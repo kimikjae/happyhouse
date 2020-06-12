@@ -74,7 +74,7 @@
 					<li class="nav-item" id="notice"><a class="nav-link" id="noticetext"
 						href="<c:url value="/notice/noticelist"/>"> 공지사항 </a></li>
 					<li class="nav-item" id="news"><a class="nav-link" id="newstext"
-						href="<c:url value="#"/>"> 오늘의 뉴스 </a></li>
+						href="<c:url value="/news/list"/>"> 오늘의 뉴스 </a></li>
 					<li class="nav-item" id="surround"><a class="nav-link" id="surroundtext"
 						href="<c:url value="#"/>"> 주변탐방 </a></li>
 					<c:if test="${loginUser.id != null}">

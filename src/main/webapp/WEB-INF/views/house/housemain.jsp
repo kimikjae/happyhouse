@@ -29,6 +29,5 @@
 
 		</div>
 	</form>
-	<a href="news/list">뉴스 목록</a>
 </body>
 </html>
