@@ -11,13 +11,6 @@
 	function movewrite() {
 		location.href = "${root}/notice.do?act=writeForm";
 	}
-	function searchArticle() {
-		if (document.getElementById("word").value == "") {
-			alert("모든 목록 조회!!");
-		}
-		document.getElementById("searchform").action = "${root}/notice.do";
-		document.getElementById("searchform").submit();
-	}
 </script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -70,16 +63,14 @@
 			<table class="table table-borderless">
 				<tr>
 					<td>
-						<form id="searchform" method="get" class="form-inline" action="">
+						<form id="searchform" method="get" class="form-inline" action="<c:url value="/notice/noticelist"/>">
 							<input type="hidden" name="act" id="act" value="list"> <select
-								class="form-control margin-right" name="key" id="key">
-								<option value="id" selected="selected">아이디</option>
+								class="form-control margin-right" id="key" name="key">
+								<option value="none">==선택==</option>
+								<option value="subject" selected>제목</option>
 								<option value="name">작성자이름</option>
-								<option value="subject">제목</option>
-							</select> <input type="text" class="form-control margin-right"
-								placeholder="검색하세요" name="word" id="word">
-							<button type="button" class="btn btn-primary margin-right"
-								onclick="javascript:searchArticle();">검색</button>
+							</select> <input type="text" class="form-control margin-right" name="word" id="word">
+							<button class="btn btn-primary margin-right">검색</button>
 
 						</form>
 					</td>

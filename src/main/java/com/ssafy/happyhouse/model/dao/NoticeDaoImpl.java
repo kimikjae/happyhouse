@@ -1,158 +1,58 @@
 package com.ssafy.happyhouse.model.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssafy.happyhouse.model.dto.NoticeDto;
-import com.ssafy.happyhouse.util.DBUtil;
+import com.ssafy.happyhouse.model.dto.NoticeSearchDto;
 
 @Repository
 public class NoticeDaoImpl implements NoticeDao {
 	
-	@Override
-	public List<NoticeDto> listArticle(String key, String word) throws SQLException {
-		List<NoticeDto> list = new ArrayList<NoticeDto>();
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-			conn = DBUtil.getConnection();
-			StringBuilder sql = new StringBuilder();
-			sql.append("select noticeno, id, name, subject, content, uploaddate \n");
-			sql.append("from notice \n");
-			if (!word.isEmpty()) {
-				if ("subject".equals(key)) {
-					sql.append("where subject like ? \n");
-				} else {
-					sql.append("where " + key + " = ? \n");
-				}
-			}
-			sql.append("order by noticeno desc \n");
-			pstmt = conn.prepareStatement(sql.toString());
-			if (!word.isEmpty()) {
-				if ("subject".equals(key))
-					pstmt.setString(1, "%" + word + "%");
-				else
-					pstmt.setString(1, word);
-			}
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				NoticeDto noticeDto = new NoticeDto();
-				noticeDto.setNoticeno(rs.getInt("noticeno"));
-				noticeDto.setId(rs.getString("id"));
-				noticeDto.setName(rs.getString("name"));
-				noticeDto.setSubject(rs.getString("subject"));
-				noticeDto.setContent(rs.getString("content"));
-				noticeDto.setUploaddate(rs.getString("uploaddate"));
-				
-				list.add(noticeDto);
-			}
-		} finally {
-			DBUtil.close(rs);
-			DBUtil.close(pstmt);
-			DBUtil.close(conn);
+	private static final String NS = "com.ssafy.happyhouse.model.dao.NoticeDao.";
+	
+	@Autowired
+	private SqlSession sqlSession;
+	
+	public int insertNotice(NoticeDto noticeDto){
+		return sqlSession.insert(NS + "insertNotice", noticeDto);
+	}
+	
+	public List<NoticeDto> listArticle(String key, String word){
+	
+		if(word==null||word=="") {
+			return sqlSession.selectList(NS+ "listArticleAll");
 		}
-		return list;
+		else {
+			NoticeSearchDto noticeSearchDto = new NoticeSearchDto();
+			noticeSearchDto.setKey(key);
+			noticeSearchDto.setWord(word);
+			System.out.println("key : "+key);
+			System.out.println("word : "+word);
+			return sqlSession.selectList(NS + "listArticle",noticeSearchDto);
+		}
+		
+		
+	}
+	
+	public NoticeDto selectNoticeByNoticeNo(int noticeno){
+		return sqlSession.selectOne(NS + "selectNoticeByNoticeNo", noticeno);
+	}
+	
+	public int updateNotice(NoticeDto noticeDto){
+		return sqlSession.update(NS + "updateNotice", noticeDto);
+	}
+	
+	public int deleteNotice(int noticeno){
+		return sqlSession.delete(NS + "deleteNotice", noticeno);
 	}
 
 	@Override
-	public void insertNotice(NoticeDto noticeDto) throws SQLException {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		try {
-			conn = DBUtil.getConnection();
-			StringBuilder insertMember = new StringBuilder();
-			
-			insertMember.append("insert into notice (id, name, subject, content, uploaddate) \n");
-			insertMember.append("values ( ? , ? , ? , ? ,now() ) ");
-			pstmt = conn.prepareStatement(insertMember.toString());
-			pstmt.setString(1, noticeDto.getId());
-			pstmt.setString(2, noticeDto.getName());
-			pstmt.setString(3, noticeDto.getSubject());
-			pstmt.setString(4, noticeDto.getContent());
-			pstmt.executeUpdate();
-		} finally {
-			DBUtil.close(pstmt);
-			DBUtil.close(conn);
-		}
+	public List<NoticeDto> selectAll() throws SQLException {
+		return sqlSession.selectList(NS + "selectAll");
 	}
-
-	@Override
-	public NoticeDto selectNoticeByNoticeNo(int noticeno) throws SQLException {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs= null;
-		try {
-			conn = DBUtil.getConnection();
-			String sql = "select noticeno, id, name, subject, content, uploaddate \n "
-					+" from notice " + 
-					" where noticeno = ? ";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, noticeno);
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				NoticeDto noticeDto = new NoticeDto();
-				noticeDto.setNoticeno(rs.getInt("noticeno"));
-				noticeDto.setId(rs.getString("id"));
-				noticeDto.setName(rs.getString("name"));
-				noticeDto.setSubject(rs.getString("subject"));
-				noticeDto.setContent(rs.getString("content"));
-				noticeDto.setUploaddate(rs.getString("uploaddate"));
-				return noticeDto;
-			}
-		} finally {
-			DBUtil.close(rs);
-			DBUtil.close(pstmt);
-			DBUtil.close(conn);
-		}
-		return null;
-	}
-
-	@Override
-	public void updateNotice(NoticeDto noticeDto) throws SQLException {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		try {
-			conn = DBUtil.getConnection();
-			StringBuilder insertMember = new StringBuilder();
-			
-			insertMember.append(" update notice set subject= ? , content= ? ,  uploaddate= now() where noticeno = ? " );
-			pstmt = conn.prepareStatement(insertMember.toString());
-			
-			int index=1;
-			pstmt.setString(index++, noticeDto.getSubject());
-			pstmt.setString(index++, noticeDto.getContent());
-			pstmt.setInt(index++, noticeDto.getNoticeno());
-			
-			pstmt.executeUpdate();
-		} finally {
-			DBUtil.close(pstmt);
-			DBUtil.close(conn);
-		}
-	}
-
-	@Override
-	public void deleteNotice(int noticeno) throws SQLException {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		try {
-			conn = DBUtil.getConnection();
-			String sql = "delete from notice where noticeno = ?";
-			pstmt = conn.prepareStatement(sql);
-			int index=1;
-			pstmt.setInt(index++,  noticeno);
-			pstmt.executeUpdate();
-		} finally {
-			DBUtil.close(pstmt);
-			DBUtil.close(conn);
-		}
-	}
-
 }

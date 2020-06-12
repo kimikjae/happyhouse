@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mappers/HouseDeal.xml -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.happyhouse.model.dao.NoticeDao">
+	<select id="listArticle" parameterType="NoticeSearchDto" resultType="NoticeDto">
+		select 
+			noticeno, 
+			id, 
+			name, 
+			subject, 
+			content, 
+			uploaddate
+		from
+			notice
+		where
+			1 = 1 
+		<if test='key.equals("name")'>
+			 and name like CONCAT('%',#{word},'%') 
+		</if>
+		<if test='key.equals("subject")'>
+			 and subject like CONCAT('%',#{word},'%')  
+		</if>
+	</select>
+	<select id="listArticleAll" resultType="NoticeDto">
+		select 
+			noticeno, 
+			id, 
+			name, 
+			subject, 
+			content, 
+			uploaddate
+		from
+			notice
+	</select>
+	<insert id="insertNotice" parameterType="NoticeDto">
+		insert into 
+			notice (
+			id, 
+			name, 
+			subject, 
+			content, 
+			uploaddate
+		) values (
+			#{id},
+			#{name},
+			#{subject},
+			#{content},
+			now()
+		)
+	</insert>
+	<select id="selectNoticeByNoticeNo" parameterType="int" resultType="NoticeDto">
+		select 
+			noticeno, 
+			id, 
+			name, 
+			subject, 
+			content, 
+			uploaddate 
+		from 
+			notice 
+		where 
+			noticeno = #{noticeno}
+	</select>
+	<update id="updateNotice" parameterType="NoticeDto">
+		update 
+			notice 
+		set 
+			subject= #{subject}, 
+			content= #{content},  
+			uploaddate= now()
+		where 
+			noticeno = #{noticeno}
+	</update>
+	<delete id="deleteNotice">
+		delete 
+			from notice
+       	where 
+       		noticeno = #{noticeno}
+	</delete>
+</mapper>   

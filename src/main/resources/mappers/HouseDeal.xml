@@ -35,7 +35,7 @@
 		from 
 			housedeal 
 		where 
-			1 = 1 and type = #{type}  and 
+			1 = 1 and 
 			<if test='searchType.equals("all")' >
 				 dong like CONCAT('%',#{searchWord},'%') or 
 				 AptName like CONCAT('%',#{searchWord},'%') 
@@ -46,7 +46,6 @@
 			<if test='searchType.equals("AptName")'>
 			 AptName like CONCAT('%',#{searchWord},'%')
 			</if>
-			<if test="word!=null"></if>
 			
 	</select>
 </mapper>    

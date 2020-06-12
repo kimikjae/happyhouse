@@ -54,15 +54,15 @@ public class HouseController {
 	@PostMapping("/searchlist")
 	public String searchlist(String type1, String type2, String type3, String type4, String searchType,
 			String searchWord, Model model) throws SQLException {
-		String type[] = new String[5];
-		type[1] = type1;
-		type[2] = type2;
-		type[3] = type3;
-		type[4] = type4;
+//		String type[] = new String[5];
+//		type[1] = type1;
+//		type[2] = type2;
+//		type[3] = type3;
+//		type[4] = type4;
 		String searType = searchType;
 		String searWord = searchWord;
 		SearchDto searchDto = new SearchDto();
-		searchDto.setType(type);
+		//searchDto.setType(type);
 		searchDto.setSearchType(searchType);
 		searchDto.setSearchWord(searWord);
 // 		-------- Dto 객체 세팅------------

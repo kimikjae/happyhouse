@@ -43,19 +43,11 @@ public class HouseDaoImpl implements HouseDao{
 	}
 	public List<HouseDeal>detaillist(SearchDto searchDto){
 		Search2Dto temp = new Search2Dto();	
-		String [] type=searchDto.getType();
 		String searchType=searchDto.getSearchType();
 		String searchword =searchDto.getSearchWord();
-		String temptype=null;
-		for(int i=1;i<5;i++) {
-			if(type[i]!=null) {
-				temptype=type[i];
-			}
-		}
-		temp.setType(temptype);
+
 		temp.setSearchType(searchType);
 		temp.setSearchWord(searchword);
-		System.out.println(searchword);
 		return sqlSession.selectList(NS + "detaillist", temp);
 	}
 }
