@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.google.gson.Gson;
 import com.ssafy.happyhouse.model.dto.HouseDeal;
-import com.ssafy.happyhouse.model.dto.SearchDto;
 import com.ssafy.happyhouse.model.service.HouseService;
 
 @Controller
@@ -37,6 +37,8 @@ public class HouseController {
 		int sizePerPage = 10; // 한 페이지에 보여줄 게시글 수 나중에 확인
 		List<HouseDeal> list = houseservice.searchAll(currentPage, sizePerPage);
 		model.addAttribute("List", list);
+		Gson gson = new Gson();
+		model.addAttribute("jsonList", gson.toJson(list));
 		model.addAttribute("navigation", houseservice.makePageNavigation(currentPage, sizePerPage));
 	}
 
@@ -48,6 +50,8 @@ public class HouseController {
 		List<HouseDeal> list = houseservice.searchAll(currentPage, sizePerPage);
 
 		model.addAttribute("List", list);
+		Gson gson = new Gson();
+		model.addAttribute("jsonList", gson.toJson(list));
 		model.addAttribute("navigation", houseservice.makePageNavigation(currentPage, sizePerPage));
 	}
 

@@ -31,11 +31,15 @@
 }
 .tableDiv {
 	margin: auto;
-	width: 60%;
+	width: 90%;
 	align-content: center;
 }
-#center{
-	align:center;
+.set-min-height {
+	min-height: 100%;
+}
+.center{
+	float: left;
+	width: 50%;
 }
 #searchWord{
 	width:250px;

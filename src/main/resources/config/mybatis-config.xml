@@ -8,5 +8,6 @@
 	<mappers>
 		<mapper resource="mappers/HouseDeal.xml"/>
 		<mapper resource="mappers/Member.xml"/>
+		<mapper resource="mappers/Map.xml"/>
 	</mappers>
 </configuration>

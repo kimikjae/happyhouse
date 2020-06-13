@@ -1,10 +1,5 @@
 package com.ssafy.happyhouse.model.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -13,9 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.ssafy.happyhouse.model.dto.HouseDeal;
 import com.ssafy.happyhouse.model.dto.Pair;
-import com.ssafy.happyhouse.model.dto.Search2Dto;
-import com.ssafy.happyhouse.model.dto.SearchDto;
-import com.ssafy.happyhouse.util.DBUtil;
 
 @Repository
 public class HouseDaoImpl implements HouseDao{

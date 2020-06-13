@@ -17,9 +17,12 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+	
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <script type="text/javascript">
 	function pageMove(pg) {
+		console.log(pg);
 		document.getElementById("pg").value = pg;
 		document.getElementById("pageform").action = "<c:url value="/house/houselist"/>";
 		document.getElementById("pageform").submit();
@@ -132,7 +135,6 @@
 				});
 	</script>
 
-
 	<h1 id="mainWindow" align="center">전체 검색 화면</h1>
 	<form id="searchform" method="post"
 		action="<c:url value="/house/searchlist"/>">
@@ -142,7 +144,7 @@
 			<button class="btn btn-secondary">검색</button>
 		</div>
 	</form>
-	<div id="center">
+	<div id="leftCenter" class="center">
 		<div class="tableDiv">
 			<table class="table table-bordered">
 				<thead class="thead-light">
@@ -186,6 +188,81 @@
 			</form>
 		</div>
 	</div>
+	<div class="center">
+		<div class="tableDiv">
+			<div id="map" style="width:100%;height:100%;min-height:500px;"></div>
+		</div>
+	</div>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8a74d23e79598649f4ce44d5980a97ed&libraries=services,drawing"></script>
+	<script>
+		var container = document.getElementById('map');
+		var options = {
+			center : new kakao.maps.LatLng(33.450701, 126.570667),
+			level : 3
+		};
+
+		var map = new kakao.maps.Map(container, options);
+		
+		var geocoder = new kakao.maps.services.Geocoder();
+		
+		window.onload = () => {
+			let requestLists = ${jsonList};
+			//console.log(requestLists);
+			if(requestLists) {
+				//console.log('진입');
+				let addressLists = new Array();
+				for(code of requestLists) {
+					axios.get('http://localhost:8000/ssafy/api/map/codetoaddress/' + code.code)
+					.then(response => {
+						addressLists.push(response.data);
+						//console.log(addressLists);
+					})
+					.then(()=>{
+						if(requestLists.length == addressLists.length) {
+							//console.log('진입');
+							//console.log(addressLists);
+							for(let i=0; i<addressLists.length; ++i){
+								//console.log(requestLists[i]);
+								addressLists[i]+=' '+requestLists[i].dong+' '+requestLists[i].jibun;
+							}
+							console.log(addressLists);
+							
+							// 주소로 좌표를 검색합니다
+							for(address of addressLists) {
+								geocoder.addressSearch(address, function(result, status) {
+	
+								    // 정상적으로 검색이 완료됐으면 
+								     if (status === kakao.maps.services.Status.OK) {
+	
+								        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+								        // 결과값으로 받은 위치를 마커로 표시합니다
+								        var marker = new kakao.maps.Marker({
+								            map: map,
+								            position: coords
+								        });
+	
+								        // 인포윈도우로 장소에 대한 설명을 표시합니다
+								        var infowindow = new kakao.maps.InfoWindow({
+								            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+								        });
+								        infowindow.open(map, marker);
+	
+								        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+								        map.setCenter(coords);
+								    } 
+								});
+							}
+						}
+					})
+					.catch(error => {
+						console.dir(error);
+					});
+				}
+			}
+		}
+	</script>
 	<!-- 	<div id="map" style="width: 1000px; height: 600px;"></div>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c164a2d37e22a4db96b5694958a39cdf"></script>

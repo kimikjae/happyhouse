@@ -9,7 +9,7 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/header.jsp"%>
-	<h1>상세검색화면</h1>
+	<div align="center"><h1>상세 검색 화면</h1></div>
 	<table>
 
 		<tr>
