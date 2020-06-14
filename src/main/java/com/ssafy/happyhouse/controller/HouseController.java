@@ -20,7 +20,7 @@ public class HouseController {
 
 	@Autowired
 	private HouseService houseservice;
-
+	
 	@GetMapping("/housedetail")
 	public void deatil(Model model, int no) {
 		System.out.println("controller : detail()");

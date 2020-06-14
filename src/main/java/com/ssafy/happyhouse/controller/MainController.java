@@ -50,4 +50,16 @@ public class MainController {
 		return new ResponseEntity<List<DongDto>>(dong, HttpStatus.OK);
 	}
 	
+	
+	@SuppressWarnings("unchecked")
+	@ApiOperation(value = "구의 정보를 가져온다.", response = List.class)
+	@GetMapping(value = "/map")
+	public ResponseEntity<List<DongDto>> findLocation() throws Exception {
+		List<DongDto> list = cityService.selectAll();
+		System.out.println(list.size());
+		return new ResponseEntity<List<DongDto>>(list, HttpStatus.OK);
+	}
+	
+	
+	
 }

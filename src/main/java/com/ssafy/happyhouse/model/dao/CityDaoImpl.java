@@ -23,12 +23,15 @@ public class CityDaoImpl implements CityDao {
 
 	@Override
 	public List<DongDto> selectDong(String city,String gu) {
-		System.out.println(city);
-		System.out.println(gu);
 		gugunDto dto = new gugunDto();
 		dto.setCity(city);
 		dto.setGugun(gu);
 		return sqlSession.selectList(NS+"selectDong",dto);
+	}
+
+	@Override
+	public List<DongDto> selectAll() {
+		return sqlSession.selectList(NS+"selectAll");
 	}
 
 }

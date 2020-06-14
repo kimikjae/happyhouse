@@ -19,9 +19,11 @@ public class CityServiceImpl implements CityService {
 	}
 	@Override
 	public List<DongDto> selectDong(String city, String gu) {
-		System.out.println(city);
-		System.out.println(gu);
 		return dao.selectDong(city,gu);
+	}
+	@Override
+	public List<DongDto> selectAll() {
+		return dao.selectAll();
 	}
 
 }

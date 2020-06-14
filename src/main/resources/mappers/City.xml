@@ -28,4 +28,14 @@
 			 city=#{city} and 
 			 gugun=#{gugun}
 	</select>
+	<select id="selectAll" resultType="DongDto">
+		select 
+			dong,
+			jibun,
+			Aptname,
+			lat,
+			lng
+		from
+			 houseinfo 
+	</select>
 	</mapper>
