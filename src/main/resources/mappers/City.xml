@@ -49,4 +49,30 @@
 			gugun=#{gugun} and 
 			dong =#{dong} 
 	</select>
+	
+	<select id="selectDongCode" resultType="DongDto">
+		select 
+			distinct dongcode 
+		from 
+			 dongcode 
+		 where 
+		     gugun=#{gugun} and 
+		     dong=#{dong} 
+	</select>
+	
+	
+	<select id="selectList" resultType="DongDto">
+		select 
+			dong,
+			Aptname,
+			dealAmount,
+			area,
+			jibun 
+		from 
+			 housedeal  
+		 where 
+		     code=#{code} and
+		      dong=#{dong} 
+	</select>
+	
 	</mapper>

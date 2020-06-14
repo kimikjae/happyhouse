@@ -92,9 +92,6 @@
 				var city = $('#city option:selected').val();
 				var gu = $('#gugun option:selected').val();
 				var dong = this.value;
-				console.log(city);
-				console.log(gu);
-				console.log(dong);
 				$.ajax({
 					type : "GET",
 					data : {
@@ -105,6 +102,24 @@
 					url : path + "/map2",
 					success : function(data) {
 						setCenter(data);
+						list(data);
+					}
+				})
+			})
+			$('#dong').change(function() {
+				var city = $('#city option:selected').val();
+				var gu = $('#gugun option:selected').val();
+				var dong = this.value;
+				$.ajax({
+					type : "GET",
+					data : {
+						"city" : city,
+						"gu" : gu,
+						"dong" : dong
+					},
+					url : path + "/list",
+					success : function(data) {
+						list(data);
 					}
 				})
 			})

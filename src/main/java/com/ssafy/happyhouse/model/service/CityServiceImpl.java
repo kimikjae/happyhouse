@@ -29,5 +29,9 @@ public class CityServiceImpl implements CityService {
 	public DongDto selectLocation(String city, String gu, String dong) {
 		return dao.selectLocation(city,gu,dong);
 	}
+	@Override
+	public List<DongDto> selectList(String city, String gu, String dong) {
+		return dao.selectList(city,gu,dong);
+	}
 
 }

@@ -43,4 +43,27 @@ public class CityDaoImpl implements CityDao {
 		return sqlSession.selectOne(NS+"selectLocation",dto);
 	}
 
+	@Override
+	public List<DongDto> selectList(String city, String gu, String dong) {
+		DongDto dto = new DongDto();
+		dto.setCity(city);
+		dto.setGugun(gu);
+		dto.setDong(dong);
+		DongDto temp =selectDongCode(dto.getCity(),dto.getGugun(),dto.getDong());
+		int dongcode = temp.getDongcode();
+		System.out.println(dongcode);
+		DongDto temp2=new DongDto();
+		temp2.setDong(" "+dong);
+		temp2.setCode(dongcode);
+		return sqlSession.selectList(NS+"selectList",temp2);
+	}
+	@Override
+	public DongDto selectDongCode(String city, String gu, String dong) {
+		DongDto dto = new DongDto();
+		dto.setCity(city);
+		dto.setGugun(gu);
+		dto.setDong(dong);
+		return sqlSession.selectOne(NS+"selectDongCode",dto);
+	}
+
 }
