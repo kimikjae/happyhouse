@@ -15,8 +15,6 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
@@ -35,12 +33,7 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-
-	<script type="text/javascript">
-		function movewrite() {
-			location.href = "${root}/notice.do?act=writeForm";
-		}
-	</script>
+	<%@ include file="/WEB-INF/views/header.jsp"%>
 	<form name="pageform" id="pageform" method="GET" action="">
 		<input type="hidden" name="act" id="act" value="list"> <input
 			type="hidden" name="pg" id="pg" value="">
@@ -49,99 +42,6 @@
 		<input type="hidden" name="act" id="act" value="list"> <input
 			type="hidden" name="searchpg" id="searchpg" value="">
 	</form>
-	<div class="headerDiv" align="center">
-		<a href="<c:url value="/"/>"><h1>Happy House</h1></a>
-		<c:choose>
-			<c:when test="${empty loginUser}">
-				<br>
-				<div id="header" align="right">
-					<table>
-						<tbody>
-							<tr>
-								<td>
-									<form method="post"
-										action="<c:url value="/user/registerform"/>">
-										<button class="btn btn-primary">회원 가입</button>
-									</form>
-								</td>
-								<td>
-									<form method="post" action="<c:url value="/user/loginform"/>">
-										<button class="btn btn-primary">로그인</button>
-									</form>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</c:when>
-			<c:otherwise>
-				<strong>${loginUser.id }</strong>님 환영합니다.
-			<div id="header" align="right">
-					<table>
-						<tbody>
-							<tr>
-								<td>
-									<form method="post" action="<c:url value="/user/logout"/>">
-										<button class="btn btn-primary">Logout</button>
-									</form>
-								</td>
-								<td>
-									<form method="post" action="<c:url value="/user/list"/>">
-										<button class="btn btn-primary">회원정보</button>
-									</form>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</c:otherwise>
-		</c:choose>
-		<div class="background">
-			<h2 class="whiteString">HAPPY HOUSE에 오신것을 환영합니다</h2>
-		</div>
-		<div id="body">
-			<nav>
-				<ul class="nav nav-fill nav-pills justify-content-center">
-					<li class="nav-item" id="notice"><a class="nav-link"
-						id="noticetext" href="<c:url value="/notice/noticelist"/>">
-							공지사항 </a></li>
-					<li class="nav-item" id="news"><a class="nav-link"
-						id="newstext" href="<c:url value="#"/>"> 오늘의 뉴스 </a></li>
-					<li class="nav-item" id="surround"><a class="nav-link"
-						id="surroundtext" href="<c:url value="#"/>"> 주변탐방 </a></li>
-					<c:if test="${loginUser.id != null}">
-						<li class="nav-item" id="like"><a class="nav-link"
-							id="liketext" href="<c:url value="#"/>"> 관심지역설정 </a></li>
-						<li class="nav-item" id="likesurrond"><a class="nav-link"
-							id="likesurrondtext" href="<c:url value="#"/>"> 관심지역둘러보기 </a></li>
-						<li class="nav-item" id="qna"><a class="nav-link"
-							id="qnatext" href="<c:url value="/house/qna"/>"> QnA게시판 </a></li>
-						<li class="nav-item" id="apart"><form method="post"
-								action="<c:url value="/house/houselist"/>">
-								<input type="hidden" name="pg" id="pg" value="1" />
-								<div class="page">
-									<button id="butn" class="fun-btn">아파트검색</button>
-								</div>
-							</form></li>
-					</c:if>
-				</ul>
-			</nav>
-		</div>
-	</div>
-	<script type="text/javascript">
-		$('#btn').on(
-				'click',
-				function(event) {
-					$(this).toggleClass('start-fun');
-					var $page = $('.page');
-					$page.toggleClass('color-bg-start').toggleClass(
-							'bg-animate-color');
-					//change text when when button is clicked
-					$(this).hasClass('start-fun') ? $(this)
-							.text('stop the fun') : $(this).text(
-							'start the fun');
-				});
-	</script>
 
 	<h1 id="mainWindow" align="center">전체 검색 화면</h1>
 	<form id="searchform" method="post"
@@ -239,8 +139,8 @@
 								//console.log(requestLists[i]);
 								addressLists[i]+=' '+requestLists[i].dong+' '+requestLists[i].jibun;
 							}
-							console.log(requestLists);
-							console.log(addressLists);
+							//console.log(requestLists);
+							//console.log(addressLists);
 							
 							// 주소로 좌표를 검색합니다
 							for(let i=0; i<addressLists.length; ++i) {
@@ -318,7 +218,7 @@
 			for (let i = 0; i < points.length; i++) {
 			    // LatLngBounds 객체에 좌표를 추가합니다
 			    bounds.extend(points[i]);
-			    console.log('진입');
+			    //console.log('진입');
 			}
 			map.setBounds(bounds);
 		}
