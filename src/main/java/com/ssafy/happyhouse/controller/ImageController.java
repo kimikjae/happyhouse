@@ -23,10 +23,11 @@ public class ImageController {
 	@RequestMapping(value = "/image", method = RequestMethod.GET)
 	public String linkImage(Model model,String name) throws IOException {
 		System.out.println("이미지");
-		name =name.substring(0, name.indexOf("("));
+		if(name.indexOf("(") != -1) {
+			name =name.substring(0, name.indexOf("("));
+		}
 		System.out.println(name);
 		String link = imageService.retrieveImage(name);
-			
 		System.out.println(link);
 		return "house/housedetail";	
 	}
@@ -34,7 +35,9 @@ public class ImageController {
 	@RequestMapping(value = "/image", method = RequestMethod.POST)
 	public String linkImageInsert(Model model,String name) throws IOException {
 		System.out.println("삽입중...");
-		name =name.substring(0, name.indexOf("("));
+		if(name.indexOf("(") != -1) {
+			name =name.substring(0, name.indexOf("("));
+		}
 		System.out.println(name);
 		String link = imageService.retrieveImage(name);
 		model.addAttribute("linkedImage",link);
