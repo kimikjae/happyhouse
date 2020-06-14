@@ -10,8 +10,10 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href=<c:url value="/resources/css/locationSearch.css"/> />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href=<c:url value="/resources/css/locationSearch.css"/> />
 </head>
 <body>
 
@@ -48,6 +50,15 @@
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c164a2d37e22a4db96b5694958a39cdf"></script>
 	<script>
 		const path = "http://localhost:8000/ssafy";
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+		mapOption = {
+			center : new kakao.maps.LatLng(37.553305, 126.972675), // 지도의 중심좌표
+			level : 4
+		// 지도의 확대 레벨
+		};
+
+		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+		
 		$(document).ready(function() {
 			$('#city').change(function() {
 				var city = this.value;
@@ -76,7 +87,49 @@
 					}
 				})
 			})
+
+			$('#dong').change(function() {
+				var city = $('#city option:selected').val();
+				var gu = $('#gugun option:selected').val();
+				var dong = this.value;
+				$.ajax({
+					type : "GET",
+					data : {
+						"city" : city,
+						"gu" : gu,
+						"dong" : dong
+					},
+					url : path + "/map2",
+					success : function(data) {
+						setCenter(data);
+						list(data);
+					}
+				})
+			})
+			$('#dong').change(function() {
+				var city = $('#city option:selected').val();
+				var gu = $('#gugun option:selected').val();
+				var dong = this.value;
+				$.ajax({
+					type : "GET",
+					data : {
+						"city" : city,
+						"gu" : gu,
+						"dong" : dong
+					},
+					url : path + "/list",
+					success : function(data) {
+						list(data);
+					}
+				})
+			})
 		})
+		function setCenter(data) {
+			var moveLatLon = new kakao.maps.LatLng(data.lat, data.lng);
+			map.setCenter(moveLatLon);
+		}
+
+
 		function makeGugun(data) {
 			$("#gugun").empty();
 			var base = $("<option id='all'>시/구/군</option>")
@@ -112,14 +165,6 @@
 
 		})
 		function makeMap(data) {
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-			mapOption = {
-				center : new kakao.maps.LatLng(37.553305, 126.972675), // 지도의 중심좌표
-				level : 4
-			// 지도의 확대 레벨
-			};
-
-			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 			// 마커 이미지의 이미지 주소입니다
 			var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 

@@ -4,12 +4,19 @@ public class DongDto {
 	private String jibun;
 	private String Aptname;
 	private String city;
-	private int dongcoe;
+	private int dongcode;
+	private int code;
 	private String gugun;
 	private String dong;
 	private double lat;
 	private double lng;
 	
+	public int getCode() {
+		return code;
+	}
+	public void setCode(int code) {
+		this.code = code;
+	}
 	public String getJibun() {
 		return jibun;
 	}
@@ -28,11 +35,11 @@ public class DongDto {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public int getDongcoe() {
-		return dongcoe;
+	public int getDongcode() {
+		return dongcode;
 	}
-	public void setDongcoe(int dongcoe) {
-		this.dongcoe = dongcoe;
+	public void setDongcode(int dongcode) {
+		this.dongcode = dongcode;
 	}
 	public String getGugun() {
 		return gugun;

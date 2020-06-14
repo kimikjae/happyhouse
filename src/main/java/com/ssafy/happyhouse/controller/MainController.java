@@ -46,19 +46,45 @@ public class MainController {
 		String city=(String) param.get("city");
 		String gu = (String) param.get("gu");
 		List<DongDto> dong=cityService.selectDong(city,gu);
-		System.out.println(dong.size());
 		return new ResponseEntity<List<DongDto>>(dong, HttpStatus.OK);
 	}
 	
-	
 	@SuppressWarnings("unchecked")
-	@ApiOperation(value = "구의 정보를 가져온다.", response = List.class)
+	@ApiOperation(value = "지도 매물을 표시한다.", response = List.class)
 	@GetMapping(value = "/map")
 	public ResponseEntity<List<DongDto>> findLocation() throws Exception {
 		List<DongDto> list = cityService.selectAll();
-		System.out.println(list.size());
 		return new ResponseEntity<List<DongDto>>(list, HttpStatus.OK);
 	}
+	
+	
+	
+	@SuppressWarnings("unchecked")
+	@ApiOperation(value = "지도를 이동시킨다.", response = List.class)
+	@GetMapping(value = "/map2")
+	public ResponseEntity<DongDto> move(@RequestParam Map<String, Object>param) throws Exception {
+		String city=(String) param.get("city");
+		String gu = (String) param.get("gu");
+		String dong = (String)param.get("dong");
+		DongDto data = cityService.selectLocation(city,gu,dong);
+		return new ResponseEntity<DongDto>(data, HttpStatus.OK);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@ApiOperation(value = "지도를 이동시킨다.", response = List.class)
+	@GetMapping(value = "/list")
+	public ResponseEntity<List<DongDto>> findlist(@RequestParam Map<String, Object>param) throws Exception {
+		String city=(String) param.get("city");
+		String gu = (String) param.get("gu");
+		String dong = (String)param.get("dong");
+		List<DongDto> data = cityService.selectList(city,gu,dong);
+		System.out.println(data.size());
+		return new ResponseEntity<List<DongDto>>(data, HttpStatus.OK);
+	}
+	
+	
+	
+	
 	
 	
 	
