@@ -1,7 +1,34 @@
 @charset "UTF-8";
-#locationSearch{
+
+.div-float {
+	margin: auto;
+	width: 80%;
+}
+.left-float {
+	float: left;
+}
+.right-float {
+	float: right;
+}
+.margin-right {
+	margin-right: 5px;
+}
+.tableDiv {
+	margin: auto;
+	width: 80%;
+}
+
+#locationSearch {
 	background-color: #1E90FF;
 }
-#locationSearchtext{
-	color:#ffffff;
+
+#locationSearchtext {
+	color: #ffffff;
+}
+#selectbox{
+	margin-left:25%;
+}
+#map{
+	margin-top:40px;
+	 margin-left:25%;
 }

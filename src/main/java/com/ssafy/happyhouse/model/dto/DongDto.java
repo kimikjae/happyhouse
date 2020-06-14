@@ -1,12 +1,27 @@
 package com.ssafy.happyhouse.model.dto;
 
 public class DongDto {
-	String city;
-	int dongcoe;
-	String gugun;
-	String dong;
-	double lat;
-	double lng;
+	private String jibun;
+	private String Aptname;
+	private String city;
+	private int dongcoe;
+	private String gugun;
+	private String dong;
+	private double lat;
+	private double lng;
+	
+	public String getJibun() {
+		return jibun;
+	}
+	public void setJibun(String jibun) {
+		this.jibun = jibun;
+	}
+	public String getAptname() {
+		return Aptname;
+	}
+	public void setAptname(String Aptname) {
+		this.Aptname = Aptname;
+	}
 	public String getCity() {
 		return city;
 	}

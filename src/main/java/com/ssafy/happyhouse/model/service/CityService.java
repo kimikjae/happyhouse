@@ -8,4 +8,5 @@ import com.ssafy.happyhouse.model.dto.gugunDto;
 public interface CityService {
 	List<gugunDto>selectGu(String city);
 	List<DongDto> selectDong(String city, String gu);
+	List<DongDto> selectAll();
 }
