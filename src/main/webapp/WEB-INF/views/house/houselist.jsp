@@ -33,7 +33,15 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/header.jsp" %>
+	<%@ include file="/WEB-INF/views/header.jsp"%>
+	<form name="pageform" id="pageform" method="GET" action="">
+		<input type="hidden" name="act" id="act" value="list"> <input
+			type="hidden" name="pg" id="pg" value="">
+	</form>
+	<form name="searchpageform" id="searchpageform" method="GET" action="">
+		<input type="hidden" name="act" id="act" value="list"> <input
+			type="hidden" name="searchpg" id="searchpg" value="">
+	</form>
 
 	<h1 id="mainWindow" align="center">전체 검색 화면</h1>
 	<form id="searchform" method="post"
