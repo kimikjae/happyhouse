@@ -38,4 +38,15 @@
 		from
 			 houseinfo 
 	</select>
+	<select id="selectLocation" resultType="DongDto">
+		select 
+			lat,
+			lng
+		from
+			 dongcode 
+		where
+			city=#{city} and 
+			gugun=#{gugun} and 
+			dong =#{dong} 
+	</select>
 	</mapper>

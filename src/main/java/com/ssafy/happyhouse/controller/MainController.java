@@ -62,13 +62,12 @@ public class MainController {
 	@SuppressWarnings("unchecked")
 	@ApiOperation(value = "지도를 이동시킨다.", response = List.class)
 	@GetMapping(value = "/map2")
-	public ResponseEntity<List<DongDto>> findlist(@RequestParam Map<String, Object>param) throws Exception {
+	public ResponseEntity<DongDto> findlist(@RequestParam Map<String, Object>param) throws Exception {
 		String city=(String) param.get("city");
 		String gu = (String) param.get("gu");
 		String dong = (String)param.get("dong");
-		List<DongDto> list = cityService.selectLocation(city,gu,dong);
-		System.out.println(list.size());
-		return new ResponseEntity<List<DongDto>>(list, HttpStatus.OK);
+		DongDto data = cityService.selectLocation(city,gu,dong);
+		return new ResponseEntity<DongDto>(data, HttpStatus.OK);
 	}
 	
 	

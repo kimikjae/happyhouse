@@ -35,12 +35,12 @@ public class CityDaoImpl implements CityDao {
 	}
 
 	@Override
-	public List<DongDto> selectLocation(String city, String gu, String dong) {
+	public DongDto selectLocation(String city, String gu, String dong) {
 		DongDto dto = new DongDto();
 		dto.setCity(city);
 		dto.setGugun(gu);
 		dto.setDong(dong);
-		return sqlSession.selectList(NS+"selectLocation",dto);
+		return sqlSession.selectOne(NS+"selectLocation",dto);
 	}
 
 }

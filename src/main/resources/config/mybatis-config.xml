@@ -9,5 +9,7 @@
 		<mapper resource="mappers/HouseDeal.xml"/>
 		<mapper resource="mappers/Member.xml"/>
 		<mapper resource="mappers/Map.xml"/>
+		<mapper resource="mappers/City.xml"/>
+		<mapper resource="mappers/Notice.xml"/>
 	</mappers>
 </configuration>
