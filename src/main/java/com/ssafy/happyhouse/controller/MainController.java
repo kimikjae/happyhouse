@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,9 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.happyhouse.model.dto.DongDto;
+import com.ssafy.happyhouse.model.dto.SearchCityGu;
 import com.ssafy.happyhouse.model.dto.gugunDto;
 import com.ssafy.happyhouse.model.service.CityService;
 
@@ -30,9 +35,19 @@ public class MainController {
 	@ApiOperation(value = "구의 정보를 가져온다.", response = List.class)
 	@GetMapping(value = "/ci/{city}")
 	public ResponseEntity<List<gugunDto>> findGugun(@PathVariable String city) throws Exception {
-		System.out.println("aaaaa");
 		List<gugunDto> gu = cityService.selectGu(city);
-		System.out.println(gu.size());
 		return new ResponseEntity<List<gugunDto>>(gu, HttpStatus.OK);
 	}
+	
+	@SuppressWarnings("unchecked")
+	@ApiOperation(value = "동의 정보를 가져온다.", response = List.class)
+	@GetMapping(value = "/gugun")
+	public ResponseEntity<List<DongDto>> findDong(@RequestParam Map<String, Object>param) throws Exception {
+		String city=(String) param.get("city");
+		String gu = (String) param.get("gu");
+		List<DongDto> dong=cityService.selectDong(city,gu);
+		System.out.println(dong.size());
+		return new ResponseEntity<List<DongDto>>(dong, HttpStatus.OK);
+	}
+	
 }
