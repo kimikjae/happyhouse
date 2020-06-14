@@ -7,12 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href=<c:url value="/resources/css/locationSearch.css"/> />
 </head>
 <body>
@@ -50,11 +50,43 @@
 					type:"GET",
 					url:path+"/ci/"+city,
 					success:function(data){
-						console.dir(data);
+						makeGugun(data);
 					}
 				})
 			})
+			$('#gugun').change(function(){
+				var city=$('#city option:selected').val();
+				var gu= this.value;
+				console.log(city);
+				console.log(gu);
+			 	$.ajax({
+					type:"GET",
+					data:{"city": city,"gu":gu},
+					url:path+"/gugun",
+					success:function(data){
+						makeDong(data);
+					}
+				}) 
+			})
 		})
+		function makeGugun(data) {
+			$("#gugun").empty();
+			var base = $("<option id='all'>시/구/군</option>")
+			$("#gugun").append(base);
+			
+			data.forEach(function myFunction(item, index) {
+				$("#gugun").append("<option value='"+item.name+"'>"+item.name+"</option>");
+			});
+		}
+		function makeDong(data) {
+			$("#dong").empty();
+			var base = $("<option id='all'>동</option>")
+			$("#dong").append(base);
+			
+			data.forEach(function myFunction(item, index) {
+				$("#dong").append("<option value='"+item.dong+"'>"+item.dong+"</option>");
+			});
+		}
 	</script>
 </body>
 </html>

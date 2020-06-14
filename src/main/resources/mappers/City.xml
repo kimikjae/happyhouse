@@ -15,4 +15,17 @@
 		where 
 			 city.name=#{city}
 	</select>
+	<select id="selectDong" resultType="DongDto">
+		select 
+			city,
+			gugun,
+			dong,
+			lat,
+			lng 
+		from
+			 dongcode 
+		where 
+			 city=#{city} and 
+			 gugun=#{gugun}
+	</select>
 	</mapper>
