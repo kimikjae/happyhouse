@@ -76,6 +76,30 @@
 					}
 				})
 			})
+			
+			$('#dong').change(function() {
+				var city = $('#city option:selected').val();
+				var gu = $('#gugun option:selected').val();
+				var dong = this.val();
+				console.log(city);
+				console.log(gu);
+				console.log(dong);
+				$.ajax({
+					type : "GET",
+					data : {
+						"city" : city,
+						"gu" : gu,
+						"dong": dong
+					},
+					url : path + "/map2",
+					success : function(data) {
+						makeDong(data);
+					}
+				})
+			})
+			
+			
+			
 		})
 		function makeGugun(data) {
 			$("#gugun").empty();
