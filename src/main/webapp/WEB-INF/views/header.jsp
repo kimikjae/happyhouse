@@ -72,6 +72,9 @@
 		<div id="body">
 			<nav>
 				<ul class="nav nav-fill nav-pills justify-content-center">
+					<li class="nav-item" id="locationSearch"><a class="nav-link"
+						id="locationSearchtext" href="<c:url value="/"/>">
+							지역검색 </a></li>
 					<li class="nav-item" id="notice"><a class="nav-link"
 						id="noticetext" href="<c:url value="/notice/noticelist"/>">
 							공지사항 </a></li>

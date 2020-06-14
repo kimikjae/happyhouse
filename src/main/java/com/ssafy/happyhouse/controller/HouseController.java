@@ -34,6 +34,7 @@ public class HouseController {
 	@PostMapping("/houselist")
 	public void houselistPost(Model model, String pg) throws SQLException {
 		int currentPage = Integer.parseInt(pg);
+		System.out.println("pg는!!! : "+ pg);
 		int sizePerPage = 10; // 한 페이지에 보여줄 게시글 수 나중에 확인
 		List<HouseDeal> list = houseservice.searchAll(currentPage, sizePerPage);
 		model.addAttribute("List", list);
@@ -45,6 +46,7 @@ public class HouseController {
 	@GetMapping("/houselist")
 	public void houselist(Model model, String pg) throws SQLException {
 		System.out.println("controller : houselist()");
+		System.out.println("pg는!!! : "+ pg);
 		int currentPage = Integer.parseInt(pg);
 		int sizePerPage = 10; // 한 페이지에 보여줄 게시글 수 나중에 확인
 		List<HouseDeal> list = houseservice.searchAll(currentPage, sizePerPage);
@@ -56,7 +58,11 @@ public class HouseController {
 	}
 
 	@PostMapping("/searchlist")
-	public String searchlist(String searchWord, Model model) throws SQLException {
+	public String searchlist(String searchWord, Model model /*, String searchpg*/) throws SQLException {
+		System.out.println("검색을했지요");
+//		System.out.println(searchpg);
+//		int currentPage = Integer.parseInt(searchpg);
+		int sizePerPage = 10; // 한 페이지에 보여줄 게시글 수 나중에 확인
 //		String type[] = new String[5];
 //		type[1] = type1;
 //		type[2] = type2;
@@ -71,6 +77,9 @@ public class HouseController {
 // 		-------- Dto 객체 세팅------------
 		List<HouseDeal> houselist = houseservice.detaillist(searchWord);
 		model.addAttribute("List", houselist);
+		Gson gson = new Gson();
+		model.addAttribute("jsonList", gson.toJson(houselist));
+//		model.addAttribute("navigation", houseservice.makePageNavigation(currentPage, sizePerPage));
 		if (houselist == null) {}
 //		else if (searType.equals("dong")) {
 //			model.addAttribute("AoptionD", searType);
