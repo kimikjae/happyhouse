@@ -22,7 +22,7 @@ public class ImageController {
 	
 	@RequestMapping(value = "/image", method = RequestMethod.GET)
 	public String linkImage(Model model,String name) throws IOException {
-		System.out.println("이미지");
+		System.out.println("이미지"); 
 		if(name.indexOf("(") != -1) {
 			name =name.substring(0, name.indexOf("("));
 		}
