@@ -45,6 +45,10 @@
 		<input type="hidden" name="act" id="act" value="list">
 		<input type="hidden" name="pg" id="pg" value="">
 	</form>
+	<form name="searchpageform" id="searchpageform" method="GET" action="">
+		<input type="hidden" name="act" id="act" value="list">
+		<input type="hidden" name="searchpg" id="searchpg" value="">
+	</form>
 	<div class="headerDiv" align="center">
 		<a href="<c:url value="/"/>"><h1>Happy House</h1></a>
 		<c:choose>
@@ -112,8 +116,7 @@
 							id="likesurrondtext" href="<c:url value="#"/>"> 관심지역둘러보기 </a></li>
 						<li class="nav-item" id="qna"><a class="nav-link"
 							id="qnatext" href="<c:url value="/house/qna"/>"> QnA게시판 </a></li>
-						<li class="nav-item" id="apart"><form method="post"
-								action="<c:url value="/house/houselist"/>">
+						<li class="nav-item" id="apart"><form method="post" action="<c:url value="/house/houselist"/>">
 								<input type="hidden" name="pg" id="pg" value="1" />
 								<div class="page">
 									<button id="butn" class="fun-btn">아파트검색</button>
@@ -140,8 +143,7 @@
 	</script>
 
 	<h1 id="mainWindow" align="center">전체 검색 화면</h1>
-	<form id="searchform" method="post"
-		action="<c:url value="/house/searchlist"/>">
+	<form id="searchform" method="post" action="<c:url value="/house/searchlist"/>">
 		<div align="right">
 			<input type="text" name="searchWord" id="searchWord"
 				placeholder="원하는 아파트를 입력해주세요." />

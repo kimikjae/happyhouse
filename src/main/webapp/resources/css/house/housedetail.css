@@ -1,0 +1,58 @@
+.background {
+	background-image: url('/ssafy/resources/images/background.png');
+	background-position: 50% 32%;
+	min-height: 250px;
+}
+
+.whiteString {
+	color: white;
+	text-align: center;
+	padding: 50px;
+}
+
+.headerDiv {
+	margin-bottom: 20px;
+}
+#body {
+	min-width: 600px;
+}
+.div-float {
+	margin: auto;
+	width: 80%;
+}
+.left-float {
+	float: left;
+}
+.right-float {
+	float: right;
+}
+.margin-right {
+	margin-right: 5px;
+}
+.tableDiv {
+	margin: auto;
+	width: 90%;
+	align-content: center;
+}
+.set-min-height {
+	min-height: 100%;
+}
+.center{
+	float: left;
+	width: 50%;
+}
+#searchWord{
+	width:250px;
+}
+#apart{
+	background-color: #1E90FF;
+}
+#butn{
+	margin-top:5px;
+	border: 1px solid #1E90FF;
+	background-color: rgba(0,0,0,0);
+	color: #ffffff;
+}
+.table .thead-light th {
+	text-align: center;	
+}
