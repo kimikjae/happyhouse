@@ -17,7 +17,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-	
+
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <script type="text/javascript">
@@ -42,12 +42,12 @@
 		}
 	</script>
 	<form name="pageform" id="pageform" method="GET" action="">
-		<input type="hidden" name="act" id="act" value="list">
-		<input type="hidden" name="pg" id="pg" value="">
+		<input type="hidden" name="act" id="act" value="list"> <input
+			type="hidden" name="pg" id="pg" value="">
 	</form>
 	<form name="searchpageform" id="searchpageform" method="GET" action="">
-		<input type="hidden" name="act" id="act" value="list">
-		<input type="hidden" name="searchpg" id="searchpg" value="">
+		<input type="hidden" name="act" id="act" value="list"> <input
+			type="hidden" name="searchpg" id="searchpg" value="">
 	</form>
 	<div class="headerDiv" align="center">
 		<a href="<c:url value="/"/>"><h1>Happy House</h1></a>
@@ -116,7 +116,8 @@
 							id="likesurrondtext" href="<c:url value="#"/>"> 관심지역둘러보기 </a></li>
 						<li class="nav-item" id="qna"><a class="nav-link"
 							id="qnatext" href="<c:url value="/house/qna"/>"> QnA게시판 </a></li>
-						<li class="nav-item" id="apart"><form method="post" action="<c:url value="/house/houselist"/>">
+						<li class="nav-item" id="apart"><form method="post"
+								action="<c:url value="/house/houselist"/>">
 								<input type="hidden" name="pg" id="pg" value="1" />
 								<div class="page">
 									<button id="butn" class="fun-btn">아파트검색</button>
@@ -143,7 +144,8 @@
 	</script>
 
 	<h1 id="mainWindow" align="center">전체 검색 화면</h1>
-	<form id="searchform" method="post" action="<c:url value="/house/searchlist"/>">
+	<form id="searchform" method="post"
+		action="<c:url value="/house/searchlist"/>">
 		<div align="right">
 			<input type="text" name="searchWord" id="searchWord"
 				placeholder="원하는 아파트를 입력해주세요." />
@@ -168,7 +170,7 @@
 				</c:if>
 				<c:if test="${List ne 'Empty'}">
 					<c:forEach var="house" items="${List}">
-						<tr>
+						<tr id="tr${house.no}">
 							<td id="no">${house.no}</td>
 							<td id="dong">${house.dong}</td>
 							<td id="aptname"><a
@@ -196,7 +198,7 @@
 	</div>
 	<div class="center">
 		<div class="tableDiv">
-			<div id="map" style="width:100%;height:100%;min-height:500px;"></div>
+			<div id="map" style="width: 100%; height: 100%; min-height: 500px;"></div>
 		</div>
 	</div>
 	<script type="text/javascript"
@@ -211,28 +213,34 @@
 		var map = new kakao.maps.Map(container, options);
 		
 		var geocoder = new kakao.maps.services.Geocoder();
-		
+
+		let points = new Array();
 		window.onload = () => {
 			let requestLists = ${jsonList};
-			console.log(requestLists);
+			// console.log(requestLists);
 			if(requestLists) {
 				//console.log('진입');
 				let addressLists = new Array();
-				for(code of requestLists) {
+				let asyncCnt1 = 0, asyncCnt2 = 0;
+				for(let i=0; i<requestLists.length; ++i) {
+					let code = requestLists[i]; 
+					addressLists[i]={};
 					axios.get('http://localhost:8000/ssafy/api/map/codetoaddress/' + code.code)
 					.then(response => {
-						addressLists.push(response.data);
+						addressLists[i] = response.data;
 						//console.log(addressLists);
 					})
 					.then(()=>{
-						if(requestLists.length == addressLists.length) {
+						asyncCnt1++;
+						if(requestLists.length == asyncCnt1) {
 							//console.log('진입');
 							//console.log(addressLists);
 							for(let i=0; i<addressLists.length; ++i){
 								//console.log(requestLists[i]);
 								addressLists[i]+=' '+requestLists[i].dong+' '+requestLists[i].jibun;
 							}
-							//console.log(addressLists);
+							console.log(requestLists);
+							console.log(addressLists);
 							
 							// 주소로 좌표를 검색합니다
 							for(let i=0; i<addressLists.length; ++i) {
@@ -243,7 +251,9 @@
 								     if (status === kakao.maps.services.Status.OK) {
 	
 								        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-	
+								        points.push(coords);
+										asyncCnt2++;
+								        
 								        // 결과값으로 받은 위치를 마커로 표시합니다
 								        var marker = new kakao.maps.Marker({
 								            map: map,
@@ -252,13 +262,19 @@
 	
 								        // 인포윈도우로 장소에 대한 설명을 표시합니다
 								        var infowindow = new kakao.maps.InfoWindow({
-								            content: `<div style="width:150px;text-align:center;padding:6px 0;">\${address}</div>`
+								            content: `
+								            <div style="width:300px;text-align:center;padding:6px 0;">
+								            	아파트이름 : \${requestLists[i].AptName}
+									            <br>
+										       	지번 주소 : \${address}
+								            </div>
+								            `
 								        });
 								        
 								    	 // 마커에 마우스오버 이벤트를 등록합니다
 								        kakao.maps.event.addListener(marker, 'mouseover', function() {
 								          // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
-								            infowindow.open(map, marker);
+								          infowindow.open(map, marker);
 								        });
 
 								        // 마커에 마우스아웃 이벤트를 등록합니다
@@ -267,18 +283,44 @@
 								            infowindow.close();
 								        });
 								        
+								        kakao.maps.event.addListener(marker, 'click', function() {
+								        	for(let j=0; j<addressLists.length; ++j) {
+								        		let k = requestLists[j].no;
+								        		if(address==addressLists[j]) {
+								        			document.querySelector('#tr' + k).classList.toggle('table-primary');
+								        		} else {
+								        			document.querySelector('#tr' + k).classList.remove('table-primary');
+								        		}
+								        	}
+								        });
+								        
 								        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 								        map.setCenter(coords);
-								    } 
+
+										if(requestLists.length == asyncCnt2) mapMoveCallback();
+								    }								    
 								});
 							}
 						}
+					})
+					.then(()=> {
 					})
 					.catch(error => {
 						console.dir(error);
 					});
 				}
 			}
+		}
+		function mapMoveCallback(){
+			//console.log(points);
+			// 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
+			var bounds = new kakao.maps.LatLngBounds();
+			for (let i = 0; i < points.length; i++) {
+			    // LatLngBounds 객체에 좌표를 추가합니다
+			    bounds.extend(points[i]);
+			    console.log('진입');
+			}
+			map.setBounds(bounds);
 		}
 	</script>
 	<!-- 	<div id="map" style="width: 1000px; height: 600px;"></div>
