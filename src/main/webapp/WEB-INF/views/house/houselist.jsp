@@ -208,7 +208,7 @@
 		
 		window.onload = () => {
 			let requestLists = ${jsonList};
-			//console.log(requestLists);
+			console.log(requestLists);
 			if(requestLists) {
 				//console.log('진입');
 				let addressLists = new Array();
@@ -226,10 +226,11 @@
 								//console.log(requestLists[i]);
 								addressLists[i]+=' '+requestLists[i].dong+' '+requestLists[i].jibun;
 							}
-							console.log(addressLists);
+							//console.log(addressLists);
 							
 							// 주소로 좌표를 검색합니다
-							for(address of addressLists) {
+							for(let i=0; i<addressLists.length; ++i) {
+								const address = addressLists[i];
 								geocoder.addressSearch(address, function(result, status) {
 	
 								    // 정상적으로 검색이 완료됐으면 
@@ -245,10 +246,21 @@
 	
 								        // 인포윈도우로 장소에 대한 설명을 표시합니다
 								        var infowindow = new kakao.maps.InfoWindow({
-								            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+								            content: `<div style="width:150px;text-align:center;padding:6px 0;">\${address}</div>`
 								        });
-								        infowindow.open(map, marker);
-	
+								        
+								    	 // 마커에 마우스오버 이벤트를 등록합니다
+								        kakao.maps.event.addListener(marker, 'mouseover', function() {
+								          // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+								            infowindow.open(map, marker);
+								        });
+
+								        // 마커에 마우스아웃 이벤트를 등록합니다
+								        kakao.maps.event.addListener(marker, 'mouseout', function() {
+								            // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+								            infowindow.close();
+								        });
+								        
 								        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 								        map.setCenter(coords);
 								    } 
