@@ -81,3 +81,11 @@ pulsating effect on button
     transform: scale(1);
   }
 } */
+
+#map{
+	float:left;
+}
+#leftCenter{
+	float:left;
+	
+}
