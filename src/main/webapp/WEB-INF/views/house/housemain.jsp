@@ -45,8 +45,8 @@
 			</select>
 		</div>
 
-		<div id="map" style="width: 50%; height: 500px;"></div>
-		<div style="overflow:scroll; width:50%; height:500px; padding:2px;">
+		<div id="map" style="width: 45%; height: 500px;"></div>
+		<div style="overflow:scroll; width:55%; height:500px; padding:2px;">
 		<div id="leftCenter" class="center">
 			<div class="tableDiv">
 				<table class="table table-bordered">
