@@ -10,13 +10,12 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <link rel="stylesheet" type="text/css"
 	href=<c:url value="/resources/css/locationSearch.css"/> />
 </head>
 <body>
-
 	<div id="board">
 		<div id="selectbox">
 			<select id="city" name="city" class="city">
@@ -45,11 +44,36 @@
 		</div>
 
 		<div id="map" style="width: 50%; height: 500px;"></div>
+
+		<div id="leftCenter" class="center">
+			<div class="tableDiv">
+				<table class="table table-bordered">
+					<thead class="thead-light">
+						<tr>
+							<th>동</th>
+							<th>아파트이름</th>
+							<th>금액</th>
+							<th>면적</th>
+							<th>지번</th>
+						</tr>
+					</thead>
+					<thead id="listtable">
+					</thead>
+				</table>
+				<div align="center">
+					<table>
+						<tr>
+							<th>${navigation.navigator }</th>
+						<tr>
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c164a2d37e22a4db96b5694958a39cdf"></script>
 	<script>
-		const path = "http://localhost:8000/ssafy";
+		
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 		mapOption = {
 			center : new kakao.maps.LatLng(37.553305, 126.972675), // 지도의 중심좌표
@@ -58,7 +82,7 @@
 		};
 
 		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-		
+		const path = "http://localhost:8000/ssafy";
 		$(document).ready(function() {
 			$('#city').change(function() {
 				var city = this.value;
@@ -102,7 +126,6 @@
 					url : path + "/map2",
 					success : function(data) {
 						setCenter(data);
-						list(data);
 					}
 				})
 			})
@@ -119,11 +142,26 @@
 					},
 					url : path + "/list",
 					success : function(data) {
-						list(data);
+						Makelist(data);
 					}
 				})
 			})
 		})
+		
+ 		function Makelist(data){
+			$("#listtable").empty();
+ 			data.forEach(function myFunction(item, index){
+				$("#listtable").append(`
+							<tr>
+								<td>${item.dong}</td>
+								<td>${item.Aptname}</td>
+								<td>${item.dealAmount}</td>
+								<td>${item.area}</td>
+								<td>${item.jibun}</td>
+							</tr>
+				`);
+				});
+			}
 		function setCenter(data) {
 			var moveLatLon = new kakao.maps.LatLng(data.lat, data.lng);
 			map.setCenter(moveLatLon);

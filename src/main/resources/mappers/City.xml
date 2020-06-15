@@ -63,6 +63,7 @@
 	
 	<select id="selectList" resultType="DongDto">
 		select 
+			no, 
 			dong,
 			Aptname,
 			dealAmount,

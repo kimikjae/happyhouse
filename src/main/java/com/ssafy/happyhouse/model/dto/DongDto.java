@@ -10,7 +10,21 @@ public class DongDto {
 	private String dong;
 	private double lat;
 	private double lng;
+	private String dealAmount;
+	private int no;
 	
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
+	public String getDealAmount() {
+		return dealAmount;
+	}
+	public void setDealAmount(String dealAmount) {
+		this.dealAmount = dealAmount;
+	}
 	public int getCode() {
 		return code;
 	}
