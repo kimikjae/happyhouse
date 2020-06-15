@@ -86,6 +86,36 @@ pulsating effect on button
 	float:left;
 }
 #leftCenter{
-	float:left;
-	
+	float:left;	
+	margin-left: 2px;
+}
+.table .thead-light th {
+	text-align: center;	
+	height: 60px;
+	width: 200px;
+}
+.table .thead-light td {
+	text-align: center;
+}
+#price{
+	width: 150px;
+}
+#dongd{
+	width: 50px;
+}
+#jebun{
+	width: 50px;
+}
+#area{
+	width: 100px;
+}
+#aptname{
+	width: 400px;
+}
+#selectbox{
+	margin-bottom: 20px;
+	margin-left: 350px;
+}
+.dong{
+	width: 90px;
 }
