@@ -151,15 +151,13 @@
  		function Makelist(data){
 			$("#listtable").empty();
  			data.forEach(function myFunction(item, index){
-				$("#listtable").append(`
-							<tr>
-								<td>${item.dong}</td>
-								<td>${item.Aptname}</td>
-								<td>${item.dealAmount}</td>
-								<td>${item.area}</td>
-								<td>${item.jibun}</td>
-							</tr>
-				`);
+				$("#listtable").append(
+						"<tr><td>" + item.dong+"</td>"+
+						"<td>"+item.aptname+"</td>"+
+						"<td>"+item.dealAmount+"</td>"+
+						"<td>"+item.area+"</td>"+
+						"<td>"+item.jibun+"</td></tr>"
+				);
 				});
 			}
 		function setCenter(data) {

@@ -78,7 +78,6 @@ public class MainController {
 		String gu = (String) param.get("gu");
 		String dong = (String)param.get("dong");
 		List<DongDto> data = cityService.selectList(city,gu,dong);
-		System.out.println(data.size());
 		return new ResponseEntity<List<DongDto>>(data, HttpStatus.OK);
 	}
 	
