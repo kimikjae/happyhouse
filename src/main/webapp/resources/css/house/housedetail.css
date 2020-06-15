@@ -55,11 +55,12 @@
 }
 .table .thead-light th {
 	text-align: center;	
+	height: 60px;
 }
 img{
 	height: 650px; 
 	width: 800px;
 }
 form{
-	margin-left: 400px;
+	margin-left: 350px;
 }

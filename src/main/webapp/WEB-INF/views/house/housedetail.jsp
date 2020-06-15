@@ -68,14 +68,6 @@
 						<td>${home.jibun} 번지</td>
 					</tr>
 					<tr>
-						<th>거래타입</th>
-						<td>${home.type}</td>
-					</tr>
-					<tr>
-						<th>월세</th>
-						<td>${home.rentMoney}</td>
-					</tr>
-					<tr>
 						<th>매매</th>
 						<td>${home.dealAmount} 만원</td>
 					</tr>
