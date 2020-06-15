@@ -101,7 +101,7 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		$('#btn').on(
+		$('#butn').on(
 				'click',
 				function(event) {
 					$(this).toggleClass('start-fun');

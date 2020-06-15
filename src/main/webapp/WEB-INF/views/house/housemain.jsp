@@ -147,8 +147,8 @@
 				})
 			})
 		})
-		
  		function Makelist(data){
+			console.log(data);
 			$("#listtable").empty();
  			data.forEach(function myFunction(item, index){
 				$("#listtable").append(`
