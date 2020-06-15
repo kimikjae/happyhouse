@@ -80,7 +80,7 @@
 	<div>
 		<img src="${link}" alt="해당 집의 사진" id=aptimg/>
 	</div>
-	<form method="post" action="<c:url value="/house/houselist"/>">
+	<form method="post" action="<c:url value="/house/houselist"/>" id=fff>
 		<input type="hidden" name="act" value="houselist" /> <input
 			type="hidden" name="pg" value="1" />
 		<button class="btn btn-secondary">목록으로 돌아가기</button>
