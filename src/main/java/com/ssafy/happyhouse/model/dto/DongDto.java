@@ -12,7 +12,15 @@ public class DongDto {
 	private double lng;
 	private String dealAmount;
 	private int no;
+	private String area;
 	
+	
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
+	}
 	public int getNo() {
 		return no;
 	}
