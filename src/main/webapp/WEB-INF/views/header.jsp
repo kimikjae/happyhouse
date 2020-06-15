@@ -81,10 +81,10 @@
 					<li class="nav-item" id="news"><a class="nav-link"
                   id="newstext" href="<c:url value="/news/newslist"/>"> 오늘의 뉴스 </a></li>
 					<li class="nav-item" id="surround"><a class="nav-link"
-						id="surroundtext" href="<c:url value="#"/>"> 주변탐방 </a></li>
+						id="surroundtext" href="<c:url value="/surround"/>"> 주변탐방 </a></li>
 					<c:if test="${loginUser.id != null}">
 						<li class="nav-item" id="like"><a class="nav-link"
-							id="liketext" href="<c:url value="#"/>"> 관심지역설정 </a></li>
+							id="liketext" href="<c:url value="/interaction/interform"/>"> 관심지역설정 </a></li>
 						<li class="nav-item" id="likesurrond"><a class="nav-link"
 							id="likesurrondtext" href="<c:url value="#"/>"> 관심지역둘러보기 </a></li>
 						<li class="nav-item" id="qna"><a class="nav-link"

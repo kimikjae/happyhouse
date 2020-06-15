@@ -11,5 +11,6 @@
 		<mapper resource="mappers/Map.xml"/>
 		<mapper resource="mappers/City.xml"/>
 		<mapper resource="mappers/Notice.xml"/>
+		<mapper resource="mappers/inter.xml"/>
 	</mappers>
 </configuration>
