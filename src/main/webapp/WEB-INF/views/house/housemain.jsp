@@ -44,7 +44,7 @@
 		</div>
 
 		<div id="map" style="width: 50%; height: 500px;"></div>
-
+		<div style="overflow:scroll; width:600px; height:500px; padding:10px;">
 		<div id="leftCenter" class="center">
 			<div class="tableDiv">
 				<table class="table table-bordered">
@@ -60,14 +60,8 @@
 					<thead id="listtable">
 					</thead>
 				</table>
-				<div align="center">
-					<table>
-						<tr>
-							<th>${navigation.navigator }</th>
-						<tr>
-					</table>
-				</div>
 			</div>
+		</div>
 		</div>
 	</div>
 	<script type="text/javascript"
