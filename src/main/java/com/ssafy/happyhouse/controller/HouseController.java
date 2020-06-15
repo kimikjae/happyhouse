@@ -1,5 +1,6 @@
 package com.ssafy.happyhouse.controller;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.google.gson.Gson;
 import com.ssafy.happyhouse.model.dto.HouseDeal;
 import com.ssafy.happyhouse.model.service.HouseService;
+import com.ssafy.happyhouse.model.service.ImageService;
 
 @Controller
 @RequestMapping("/house")
@@ -20,10 +22,18 @@ public class HouseController {
 
 	@Autowired
 	private HouseService houseservice;
+	@Autowired
+	private ImageService imageservice;
+	
 	@GetMapping("/housedetail")
-	public void deatil(Model model, int no) {
+	public void deatil(Model model, int no) throws IOException {
 		System.out.println("controller : detail()");
 		model.addAttribute("home", houseservice.searchHouseByNo(no));
+		String name = houseservice.searchHouseByNo(no).getAptName();
+		if(name.indexOf("(") != -1) {
+			name =name.substring(0, name.indexOf("("));
+		}
+		model.addAttribute("link",imageservice.retrieveImage(name));
 	}
 	@GetMapping("/qna")
 	public String qna() {
