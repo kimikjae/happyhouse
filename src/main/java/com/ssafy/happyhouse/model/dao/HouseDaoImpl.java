@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ssafy.happyhouse.model.dto.HouseDeal;
 import com.ssafy.happyhouse.model.dto.Pair;
+import com.ssafy.happyhouse.model.dto.Trio;
 
 @Repository
 public class HouseDaoImpl implements HouseDao{
@@ -33,9 +34,17 @@ public class HouseDaoImpl implements HouseDao{
 	public int getTotalCount() {
 		return sqlSession.selectOne(NS + "getTotalCount");
 	}
-	public List<HouseDeal>detaillist(String searchWord){
-
-		return sqlSession.selectList(NS + "detaillist", searchWord);
+	public int getTotalCountBySearchWord(String searchWord) {
+		return sqlSession.selectOne(NS + "getTotalCountBySearchWord", searchWord);
+	}
+	public List<HouseDeal>detaillist(Trio t){
+		int sizePerpage = t.getY();
+		int currentPage = (t.getX()-1)*sizePerpage;
+		Trio tempt = new Trio();
+		tempt.setX(currentPage);
+		tempt.setY(sizePerpage);
+		tempt.setStr(t.getStr());
+		return sqlSession.selectList(NS + "detaillist", tempt);
 	}
 }
 

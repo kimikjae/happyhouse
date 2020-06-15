@@ -23,29 +23,28 @@
 		order 
 			by no desc
 	</select>
+		<select id="getTotalCountBySearchWord" resultType="int">
+		select 
+			count(no) 
+		from 
+			housedeal
+		where
+			AptName like CONCAT('%',#{searchWord},'%')
+	</select>
 	<select id="searchAll" parameterType="Pair" resultType="HouseDeal">
 		select * 
 		from housedeal 
 		where 1 = 1 
 		limit #{x} , #{y} 
 	</select>
-	<select id="detaillist" parameterType="String" resultType="HouseDeal">
+	<select id="detaillist" parameterType="Trio" resultType="HouseDeal">
 		select 
 			* 
 		from 
 			housedeal 
 		where 
-			1 = 1 and 
-<!-- 			<if test='searchType.equals("all")' >
-				 dong like CONCAT('%',#{searchWord},'%') or 
-				 AptName like CONCAT('%',#{searchWord},'%') 
-			</if>
-			<if test='searchType.equals("dong")'>
-			 dong like CONCAT('%',#{searchWord},'%')
-			</if>
-			<if test='searchType.equals("AptName")'> -->
-			 AptName like CONCAT('%',#{searchWord},'%')
-<!-- 			</if>
- -->			
+			AptName like CONCAT('%',#{str},'%')
+		limit
+			#{x}, #{y}
 	</select>
 </mapper>    

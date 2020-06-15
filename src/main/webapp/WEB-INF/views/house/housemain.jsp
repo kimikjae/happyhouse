@@ -14,8 +14,6 @@
 
 <link rel="stylesheet" type="text/css"
 	href=<c:url value="/resources/css/locationSearch.css"/> />
-<link rel="stylesheet" type="text/css"
-	href=<c:url value="/resources/css/house/housemain.css"/> />
 </head>
 <body>
 	<div id="board">
@@ -45,25 +43,31 @@
 			</select>
 		</div>
 
-		<div id="map" style="width: 45%; height: 500px;"></div>
-		<div style="overflow:scroll; width:55%; height:500px; padding:2px;">
+		<div id="map" style="width: 50%; height: 500px;"></div>
+
 		<div id="leftCenter" class="center">
 			<div class="tableDiv">
 				<table class="table table-bordered">
 					<thead class="thead-light">
 						<tr>
-							<th id="dongd">동</th>
-							<th id="aptname">아파트이름</th>
-							<th id="price">금액</th>
-							<th id="area">면적</th>
-							<th id="jebun">지번</th>
+							<th>동</th>
+							<th>아파트이름</th>
+							<th>금액</th>
+							<th>면적</th>
+							<th>지번</th>
 						</tr>
 					</thead>
 					<thead id="listtable">
 					</thead>
 				</table>
+				<div align="center">
+					<table>
+						<tr>
+							<th>${navigation.navigator }</th>
+						<tr>
+					</table>
+				</div>
 			</div>
-		</div>
 		</div>
 	</div>
 	<script type="text/javascript"
@@ -143,17 +147,19 @@
 				})
 			})
 		})
+		
  		function Makelist(data){
-			console.log(data);
 			$("#listtable").empty();
  			data.forEach(function myFunction(item, index){
-				$("#listtable").append(
-						"<tr><td>" + item.dong+"</td>"+
-						"<td>"+item.aptname+"</td>"+
-						"<td>"+item.dealAmount+"</td>"+
-						"<td>"+item.area+"</td>"+
-						"<td>"+item.jibun+"</td></tr>"
-				);
+				$("#listtable").append(`
+							<tr>
+								<td>\${item.dong}</td>
+								<td>\${item.aptname}</td>
+								<td>\${item.dealAmount}</td>
+								<td>\${item.area}</td>
+								<td>\${item.jibun}</td>
+							</tr>
+				`);
 				});
 			}
 		function setCenter(data) {

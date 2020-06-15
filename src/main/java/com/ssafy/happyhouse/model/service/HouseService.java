@@ -9,11 +9,11 @@ import com.ssafy.happyhouse.model.dto.SearchDto;
 import com.ssafy.happyhouse.util.PageNavigation;
 
 public interface HouseService {
-	public List<HouseDeal> detaillist(String searchWord) throws SQLException;
+	public List<HouseDeal> detaillist(int cp, int spp, String searchWord) throws SQLException;
 
 	public List<HouseDeal> searchAll(int pg, int sizePerPage) throws SQLException;
 
 	public HouseDeal searchHouseByNo(int no);
 
-	public PageNavigation makePageNavigation(int currentPage, int sizePerPage) throws SQLException;
+	public PageNavigation makePageNavigation(int currentPage, int sizePerPage, String searchWord) throws SQLException;
 }

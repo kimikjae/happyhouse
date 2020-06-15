@@ -89,12 +89,15 @@
 							id="likesurrondtext" href="<c:url value="#"/>"> 관심지역둘러보기 </a></li>
 						<li class="nav-item" id="qna"><a class="nav-link"
 							id="qnatext" href="<c:url value="/house/qna"/>"> QnA게시판 </a></li>
-						<li class="nav-item"id="aprt"><form method="post" action="<c:url value="/house/houselist"/>">
-							<input type="hidden" name="pg" value="1" />
-							<div class="page">
-								<button id="butn" class="fun-btn">아파트검색</button>
-							</div>
-						</form></li>
+						<li class="nav-item"id="aprt">
+							<form method="get" action="<c:url value="/house/houselist"/>">
+								<input type="hidden" name="pg" value="1" />
+								<input type="hidden" name="searchWord" value="" />
+								<div class="page">
+									<button id="butn" class="fun-btn">아파트검색</button>
+								</div>
+							</form>
+						</li>
 					</c:if>
 				</ul>
 			</nav>

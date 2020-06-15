@@ -19,10 +19,13 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <script type="text/javascript">
-	function pageMove(pg) {
+	function pageMove(pg, searchWord) {
 		console.log(pg);
 		document.getElementById("pg").value = pg;
 		document.getElementById("pageform").action = "<c:url value="/house/houselist"/>";
+		if(searchWord !== '') {
+			document.querySelector("#swHidden").value = searchWord;
+		}
 		document.getElementById("pageform").submit();
 	}
 </script>
@@ -35,20 +38,20 @@
 <body>
 	<%@ include file="/WEB-INF/views/header.jsp"%>
 	<form name="pageform" id="pageform" method="GET" action="">
-		<input type="hidden" name="act" id="act" value="list"> <input
-			type="hidden" name="pg" id="pg" value="">
+		<input type="hidden" name="pg" id="pg" value="">
+		<input type="hidden" name="searchWord" id="swHidden" value="">
 	</form>
 	<form name="searchpageform" id="searchpageform" method="GET" action="">
-		<input type="hidden" name="act" id="act" value="list"> <input
-			type="hidden" name="searchpg" id="searchpg" value="">
+		<input type="hidden" name="searchpg" id="searchpg" value="">
 	</form>
 
 	<h1 id="mainWindow" align="center">전체 검색 화면</h1>
-	<form id="searchform" method="post"
-		action="<c:url value="/house/searchlist"/>">
+	<form id="searchform" method="get"
+		action="<c:url value="/house/houselist"/>">
+		<input type="hidden" name="pg" id="pg" value="1">
 		<div align="right">
 			<input type="text" name="searchWord" id="searchWord"
-				placeholder="원하는 아파트를 입력해주세요." />
+				placeholder="원하는 아파트를 입력해주세요." value="${searchWord}" />
 			<button class="btn btn-secondary">검색</button>
 		</div>
 	</form>
