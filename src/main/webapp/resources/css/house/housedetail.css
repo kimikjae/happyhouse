@@ -56,3 +56,10 @@
 .table .thead-light th {
 	text-align: center;	
 }
+img{
+	height: 650px; 
+	width: 800px;
+}
+form{
+	margin-left: 400px;
+}

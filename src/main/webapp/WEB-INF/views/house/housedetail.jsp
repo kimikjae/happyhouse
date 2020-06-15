@@ -86,7 +86,7 @@
 		
 	</div>
 	<div>
-		<img type = "hidden" src="${link}" alt="해당 집의 사진" />
+		<img src="${link}" alt="해당 집의 사진" id=aptimg/>
 	</div>
 	<form method="post" action="<c:url value="/house/houselist"/>">
 		<input type="hidden" name="act" value="houselist" /> <input
