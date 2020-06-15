@@ -14,6 +14,8 @@
 
 <link rel="stylesheet" type="text/css"
 	href=<c:url value="/resources/css/locationSearch.css"/> />
+<link rel="stylesheet" type="text/css"
+	href=<c:url value="/resources/css/house/housemain.css"/> />
 </head>
 <body>
 	<div id="board">
@@ -49,12 +51,12 @@
 			<div class="tableDiv">
 				<table class="table table-bordered">
 					<thead class="thead-light">
-						<tr>
-							<th>동</th>
-							<th>아파트이름</th>
-							<th>금액</th>
-							<th>면적</th>
-							<th>지번</th>
+						<tr id= "fixed_top">
+							<th id = "dongd">동</th>
+							<th id = "aptname">아파트이름</th>
+							<th id = "price">금액</th>
+							<th id = "area">면적</th>
+							<th id = "jebun">지번</th>
 						</tr>
 					</thead>
 					<thead id="listtable">

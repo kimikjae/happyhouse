@@ -87,7 +87,9 @@ pulsating effect on button
 }
 #leftCenter{
 	float:left;	
-	margin-left: 2px;
+	width: 50%;
+	overflow-y:scroll;
+	max-height:500px;
 }
 .table .thead-light th {
 	text-align: center;	
