@@ -7,16 +7,19 @@ h3{
 }
 #leftCenter{
 	float:left;	
-	width: 50%;
+	width: 45%;
 	max-height:500px;
-	margin-right: 10px;
+	margin-right: 20px;
+	margin-left:4%;
 }
 .table .thead-light th {
+	
 	text-align: center;	
 	height: 40px;
 	width: 400px;
 }
 .table .thead-light td {
+	margin: 80px;
 	text-align: center;
 }
 #nom{
@@ -33,9 +36,17 @@ h3{
 }
 
 #selectbox{
-	margin-bottom: 20px;
-	margin-left: 750px;
+	background:blue;
+}
+#cen{
+	width:30%; margin: 0 auto
 }
 .dong{
 	width: 90px;
+}
+#surround{
+	background-color: #1E90FF;
+}
+#surroundtext{
+	color: #ffffff;
 }

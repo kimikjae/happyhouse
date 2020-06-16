@@ -1,0 +1,15 @@
+@charset "UTF-8";
+.tablesize {
+	width: 20%;
+}
+
+.background1 {
+	margin-top: 30px;
+	background-color: #BDBDBD;
+}
+#like{
+	background-color: #1E90FF;
+}
+#liketext{
+	color: #ffffff;
+}

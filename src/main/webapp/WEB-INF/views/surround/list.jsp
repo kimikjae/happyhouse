@@ -19,6 +19,7 @@
 	<%@ include file="/WEB-INF/views/header.jsp"%>
 	<div id="board">
 		<div id="selectbox">
+			<div id="cen">
 			<select id="codename1" name="codename1" class="codename1">
 				<option value="all">-대분류 선택-</option>
 				<option value="음식">음식</option>
@@ -35,6 +36,7 @@
 			</select> <select id="codename3" name="codename3" class="codename3">
 				<option value="all">--소분류 선택--</option>
 			</select>
+		</div>
 		</div>
 		<hr>
 		<h3>관심 지역 목록</h3>
