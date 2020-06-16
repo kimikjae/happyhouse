@@ -8,5 +8,15 @@
 	<delete id="delete" parameterType="Integer">
 		DELETE FROM interaction WHERE no=#{no}
 	</delete>
+	<select id="selectByNo" parameterType="int" resultType="DongDto">
+		select 
+			city,
+			gugun,
+			dong
+		from 
+			interaction  
+		where 
+			no = #{no}
+	</select>
 
 </mapper>

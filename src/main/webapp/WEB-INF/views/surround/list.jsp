@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,15 +50,14 @@
 				<div class="tableDiv">
 					<table class="table table-bordered">
 						<thead class="thead-light">
-							<c:forEach var="list" items="${interlist}">
-								<tr>
-									<td id="city">${list.city}</td>
-									<td id="gugun">${list.gugun}</td>
-									<td id="dong">${list.dong}</td>
-									<td><a href="#" onclick="movemap()">선택</a></td>
-									<td><a href="<c:url value="/surround/delete?no=${list.no }"/>">삭제</a></td>
-								</tr>
-							</c:forEach>
+						<tr id= "fixed_top">
+						<th id="nom">번호</th>
+							<th id = "ci">동</th>
+							<th id = "gu">아파트이름</th>
+							<th id = "dong">금액</th>
+							<th>선택</th>
+							<th>삭제</th>
+						</tr>
 						</thead>
 						<thead id="listtable">
 						</thead>
@@ -67,7 +68,7 @@
 		<div id="map" style="width: 45%; height: 500px;"></div>
 	</div>
 		<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c164a2d37e22a4db96b5694958a39cdf"></script>
+			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c164a2d37e22a4db96b5694958a39cdf"></script>
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 		mapOption = {
@@ -77,67 +78,80 @@
 		};
 		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 		const path = "http://localhost:8000/ssafy";
-		
-		function movemap(){
-			var city= $('#city').text();
-			var gugun=$('#gugun').text();
-			var dong=$('#dong').text();
-			console.log(city);
-			console.log(gugun);
-			console.log(dong);
+		const path2 = "http://localhost:8000/ssafy";
+		$("#listtable").ready(function() {
 			$.ajax({
-				type : "GET",
-				data : {
-					"city" : city,
-					"gu" : gugun,
-					"dong" : dong
-				},
-				url : path + "/map2",
-				success : function(data) {
-					console.log(data);
+				type:"GET",
+				url: path2+"/surround/list2",
+				success: function(data){
+					Makelist(data);
 				}
-			})
+			});
+		});
+		function Makelist(data){
+			$("#listtable").empty();
+				data.forEach(function myFunction(item, index){
+				$("#listtable").append(`
+							<tr>
+								<td id="no">\${item.no}</td>
+								<td id="city">\${item.city}</td>
+								<td id="gugun">\${item.gugun}</td>
+								<td id="dong">\${item.dong}</td>
+								<td><a href="#" onclick="selectlist(\${item.no})">선택</a></td>
+								<td><a href="#" onclick="deletelist">삭제</a></td>
+							</tr>
+				`);
+				});
+			}
+		function selectlist(no){
+			$.ajax({
+				type:"GET",
+				url: path2+"/surround/selectByNo",
+				data : {
+					"no":no
+				},
+				success: function(data){
+					setCenter(data);
+				}
+			});
 		}
-		
-		
-		
-		
-		
-		
-		function setCenter() {
+		function setCenter(data) {
 			var moveLatLon = new kakao.maps.LatLng(data.lat, data.lng);
 			map.setCenter(moveLatLon);
 		}
-	/* 	$("#map").ready(function() {
-			$.ajax({
-				type : "GET",
-				url : path + "/map",
-				success : function(data) {
-					makeMap(data);
-				}
-			})
-
-		})
-		function makeMap(data) {
-			// 마커 이미지의 이미지 주소입니다
-			var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-
-			for (var i = 0; i < data.length; i++) {
-				var loc = data[i].dong + " " + data[i].jibun;
-				// 마커 이미지의 이미지 크기 입니다
-				var imageSize = new kakao.maps.Size(20, 30);
-				// 마커 이미지를 생성합니다    
-				var markerImage = new kakao.maps.MarkerImage(imageSrc,
-						imageSize);
-				// 마커를 생성합니다
-				var marker = new kakao.maps.Marker({
-					map : map, // 마커를 표시할 지도
-					position : new kakao.maps.LatLng(data[i].lat, data[i].lng), // 마커를 표시할 위치
-					title : loc, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-					image : markerImage
-				});
+		/* 	$("#map").ready(function() {
+		$.ajax({
+			type : "GET",
+			url : path + "/map",
+			success : function(data) {
+				makeMap(data);
 			}
-		} */
+		})
+
+	})
+	function makeMap(data) {
+		// 마커 이미지의 이미지 주소입니다
+		var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+		for (var i = 0; i < data.length; i++) {
+			var loc = data[i].dong + " " + data[i].jibun;
+			// 마커 이미지의 이미지 크기 입니다
+			var imageSize = new kakao.maps.Size(20, 30);
+			// 마커 이미지를 생성합니다    
+			var markerImage = new kakao.maps.MarkerImage(imageSrc,
+					imageSize);
+			// 마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+				map : map, // 마커를 표시할 지도
+				position : new kakao.maps.LatLng(data[i].lat, data[i].lng), // 마커를 표시할 위치
+				title : loc, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+				image : markerImage
+			});
+		}
+	} */
 	</script>
+
+
+	
 </body>
 </html>
