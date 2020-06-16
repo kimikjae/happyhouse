@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.happyhouse.model.dto.CommercialData;
 import com.ssafy.happyhouse.model.dto.DongDto;
 import com.ssafy.happyhouse.model.dto.InteractionDto;
 import com.ssafy.happyhouse.model.dto.MemberDto;
@@ -34,10 +35,10 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/surround")
 public class surroundRestController {
 	@Autowired
-	InterestLocationService interservice;
+	private InterestLocationService interservice;
 	
 	@Autowired
-	SurroundService surservice;
+	private SurroundService surservice;
 	@Autowired
 	private CityService cityService;
 	
@@ -50,12 +51,16 @@ public class surroundRestController {
 		System.out.println(list.size());
 		return new ResponseEntity<List<InteractionDto>>(list, HttpStatus.OK);
 	}
-//	@GetMapping("/delete")
-//	public String delete(int no, Model model) throws IOException {
-//		System.out.println("cont");
-//		surservice.delete(no);
-//		return "redirect:/surround/list";
-//	}
+	
+	@GetMapping("/deleteByNo")
+	public ResponseEntity<List<InteractionDto>> delete(HttpSession httpSession, @RequestParam Map<String, Object>param) throws IOException {
+		int no = Integer.parseInt((String)param.get("no"));
+		surservice.delete(no);
+		MemberDto mem = (MemberDto) httpSession.getAttribute("loginUser");
+		List<InteractionDto>list = interservice.selectlist(mem.getId());
+		return new ResponseEntity<List<InteractionDto>>(list, HttpStatus.OK);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@GetMapping("/selectByNo")
 	public ResponseEntity<DongDto> movemap(@RequestParam Map<String, Object>param) throws IOException {
@@ -65,8 +70,33 @@ public class surroundRestController {
 		String gu = juso.getGugun();
 		String dong = juso.getDong();
 		DongDto data = cityService.selectLocation(city,gu,dong);
-		System.out.println(data.getLat());
 		return new ResponseEntity<DongDto>(data, HttpStatus.OK);
+	}
+	@SuppressWarnings("unchecked")
+	@ApiOperation(value = "중분류의 정보를 가져온다.", response = List.class)
+	@GetMapping(value = "/codename2/{codename1}")
+	public ResponseEntity<List<CommercialData>> findCodename2(@PathVariable String codename1) throws Exception {
+		List<CommercialData> codename2 = surservice.selectCodeName2(codename1);
+		return new ResponseEntity<List<CommercialData>>(codename2, HttpStatus.OK);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@ApiOperation(value = "중분류의 정보를 가져온다.", response = List.class)
+	@GetMapping(value = "/codename3/{codename2}")
+	public ResponseEntity<List<CommercialData>> findCodename3(@PathVariable String codename2) throws Exception {
+		List<CommercialData> codename3 = surservice.selectCodeName3(codename2);
+		return new ResponseEntity<List<CommercialData>>(codename3, HttpStatus.OK);
+	}
+	@SuppressWarnings("unchecked")
+	@ApiOperation(value = "좌표들고오기", response = List.class)
+	@GetMapping(value = "/drawmap")
+	public ResponseEntity<List<CommercialData>> findletlot(@RequestParam Map<String, Object>param) throws Exception {
+		String codename1=(String) param.get("codename1");
+		String codename2 = (String) param.get("codename2");
+		String codename3 = (String)param.get("codename3");
+		List<CommercialData> data = surservice.selectletlot(codename1,codename2,codename3);
+		System.out.println(data.size());
+		return new ResponseEntity<List<CommercialData>>(data, HttpStatus.OK);
 	}
 	
 	

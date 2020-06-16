@@ -1,5 +1,5 @@
 
-	<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -18,46 +18,40 @@
 	<%@ include file="/WEB-INF/views/header.jsp"%>
 	<div id="board">
 		<div id="selectbox">
-			<select id="a" name="a" class="a">
-				<option value="all">도/광역시</option>
-				<option value="서울특별시">서울시</option>
-				<option value="경기도">경기도</option>
-				<option value="인천광역시">인천광역시</option>
-				<option value="부산광역시">부산광역시</option>
-				<option value="대전광역시">대전광역시</option>
-				<option value="대구광역시">대구광역시</option>
-				<option value="울산광역시">울산광역시</option>
-				<option value="세종특별자치시">세종시</option>
-				<option value="광주광역시">광주광역시</option>
-				<option value="강원도">강원도</option>
-				<option value="충청북도">충청북도</option>
-				<option value="경상북도">경상북도</option>
-				<option value="경상남도">경상남도</option>
-				<option value="전라북도">전라북도</option>
-				<option value="전라남도">전라남도</option>
-				<option value="제주특별자치도">제주도</option>
-			</select> <select id="b" name="b" class="b">
-				<option value="all">시/구/군</option>
-			</select> <select id="c" name="c" class="c">
-				<option value="all">동</option>
+			<select id="codename1" name="codename1" class="codename1">
+				<option value="all">-대분류 선택-</option>
+				<option value="음식">음식</option>
+				<option value="생활서비스">생활서비스</option>
+				<option value="소매">소매</option>
+				<option value="의료">의료</option>
+				<option value="학문/교육">학문/교육</option>
+				<option value="관광/여가/오락">관광/여가/오락</option>
+				<option value="부동산">부동산</option>
+				<option value="숙박">숙박</option>
+				<option value="스포츠">스포츠</option>
+			</select> <select id="codename2" name="codename2" class="codename2">
+				<option value="all">--중분류 선택--</option>
+			</select> <select id="codename3" name="codename3" class="codename3">
+				<option value="all">--소분류 선택--</option>
 			</select>
 		</div>
 		<hr>
 		<h3>관심 지역 목록</h3>
 		<hr>
-		<div style="overflow: scroll; width: 25%; height: 500px; padding: 2px; float: left;">
+		<div
+			style="overflow: scroll; width: 25%; height: 500px; padding: 2px; float: left;">
 			<div id="leftCenter" class="center">
 				<div class="tableDiv">
 					<table class="table table-bordered">
 						<thead class="thead-light">
-						<tr id= "fixed_top">
-						<th id="nom">번호</th>
-							<th id = "ci">동</th>
-							<th id = "gu">아파트이름</th>
-							<th id = "dong">금액</th>
-							<th>선택</th>
-							<th>삭제</th>
-						</tr>
+							<tr id="fixed_top">
+								<th id="nom">번호</th>
+								<th id="ci">동</th>
+								<th id="gu">아파트이름</th>
+								<th id="dong">금액</th>
+								<th>선택</th>
+								<th>삭제</th>
+							</tr>
 						</thead>
 						<thead id="listtable">
 						</thead>
@@ -67,8 +61,11 @@
 		</div>
 		<div id="map" style="width: 45%; height: 500px;"></div>
 	</div>
-		<script type="text/javascript"
-			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c164a2d37e22a4db96b5694958a39cdf"></script>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c164a2d37e22a4db96b5694958a39cdf"></script>
+
+
+	<!-- 지도선택 -->
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 		mapOption = {
@@ -78,11 +75,10 @@
 		};
 		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 		const path = "http://localhost:8000/ssafy";
-		const path2 = "http://localhost:8000/ssafy";
 		$("#listtable").ready(function() {
 			$.ajax({
 				type:"GET",
-				url: path2+"/surround/list2",
+				url: path+"/surround/list2",
 				success: function(data){
 					Makelist(data);
 				}
@@ -98,15 +94,27 @@
 								<td id="gugun">\${item.gugun}</td>
 								<td id="dong">\${item.dong}</td>
 								<td><a href="#" onclick="selectlist(\${item.no})">선택</a></td>
-								<td><a href="#" onclick="deletelist">삭제</a></td>
+								<td><a href="#" onclick="deletelist(\${item.no})">삭제</a></td>
 							</tr>
 				`);
 				});
 			}
+		function deletelist(no){
+			$.ajax({
+				type:"GET",
+				url: path+"/surround/deleteByNo",
+				data : {
+					"no":no
+				},
+				success: function(data){
+					Makelist(data);
+				}
+			});
+		}
 		function selectlist(no){
 			$.ajax({
 				type:"GET",
-				url: path2+"/surround/selectByNo",
+				url: path+"/surround/selectByNo",
 				data : {
 					"no":no
 				},
@@ -149,9 +157,94 @@
 			});
 		}
 	} */
+	
+	</script>
+	<!-- 분류선택 -->
+	<script>
+			$(document).ready(function() {
+				$('#codename1').change(function() {
+					var codename1 = this.value;
+					$.ajax({
+						type : "GET",
+						url : path + "/surround/codename2/" + codename1,
+						success : function(data) {
+							makeCodename2(data);
+						}
+					})
+				})
+				$('#codename2').change(function() {
+					var codename2 = this.value;
+					$.ajax({
+						type : "GET",
+						url : path + "/surround/codename3/" + codename2,
+						success : function(data) {
+							makeCodename3(data);
+						}
+					})
+				})
+				$('#codename3').change(function() {
+					var codename1 = $('#codename1 option:selected').val();
+					var codename2 = $('#codename2 option:selected').val();
+					var codename3 = this.value;
+					$.ajax({
+						type : "GET",
+						data : {
+							"codename1" : codename1,
+							"codename2" : codename2,
+							"codename3" : codename3
+						},
+						url : path + "/surround/drawmap",
+						success : function(data) {
+							makeMap(data);
+						}
+					})
+				})
+			})
+			function makeMap(data) {
+			// 마커 이미지의 이미지 주소입니다
+			var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+			for (var i = 0; i < data.length; i++) {
+				var loc = data[i].dong + " " + data[i].jibun;
+				// 마커 이미지의 이미지 크기 입니다
+				var imageSize = new kakao.maps.Size(20, 30);
+				// 마커 이미지를 생성합니다    
+				var markerImage = new kakao.maps.MarkerImage(imageSrc,
+						imageSize);
+				// 마커를 생성합니다
+				var marker = new kakao.maps.Marker({
+					map : map, // 마커를 표시할 지도
+					position : new kakao.maps.LatLng(data[i].lat, data[i].lng), // 마커를 표시할 위치
+					title : loc, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+					image : markerImage
+				});
+			}
+		}
+			function makeCodename2(data) {
+			$("#codename2").empty();
+			var base = $("<option id='all'>--중분류 선택--</option>")
+			$("#codename2").append(base);
+
+			data.forEach(function myFunction(item, index) {
+				$("#codename2").append(
+						"<option value='"+item.codename2+"'>" + item.codename2
+								+ "</option>");
+			});
+			}
+			function makeCodename3(data) {
+				$("#codename3").empty();
+				var base = $("<option id='all'>--소분류 선택--</option>")
+				$("#codename3").append(base);
+
+				data.forEach(function myFunction(item, index) {
+					$("#codename3").append(
+							"<option value='"+item.codename3+"'>" + item.codename3
+									+ "</option>");
+				});
+				}
+			
 	</script>
 
 
-	
 </body>
 </html>

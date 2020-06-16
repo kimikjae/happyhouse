@@ -6,17 +6,46 @@
 
 
 	<delete id="delete" parameterType="Integer">
-		DELETE FROM interaction WHERE no=#{no}
+		DELETE FROM interaction WHERE
+		no=#{no}
 	</delete>
 	<select id="selectByNo" parameterType="int" resultType="DongDto">
-		select 
-			city,
-			gugun,
-			dong
-		from 
-			interaction  
-		where 
-			no = #{no}
+		select
+		city,
+		gugun,
+		dong
+		from
+		interaction
+		where
+		no = #{no}
+	</select>
+
+	<select id="selectCodename2" parameterType="String" resultType="CommercialData">
+		select
+		distinct(codename2) 
+		from
+		commercial_data 
+		where
+		codename1=#{codename1} 
+	</select>
+	<select id="selectCodename3" parameterType="String" resultType="CommercialData">
+		select
+		distinct(codename3) 
+		from
+		commercial_data 
+		where
+		codename2=#{codename2} 
+	</select>
+	<select id="selectletlot" parameterType="CommercialData" resultType="CommercialData">
+		select
+		replace(lng, '"','') lng,
+        replace(lat, '"','') lat 
+		from
+		commercial_data 
+		where
+		codename1=#{codename1} and 
+		codename2=#{codename2} and 
+		codename3=#{codename3} 
 	</select>
 
 </mapper>

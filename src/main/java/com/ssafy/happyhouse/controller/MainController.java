@@ -50,7 +50,7 @@ public class MainController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@ApiOperation(value = "지도 매물을 표시한다.", response = List.class)
+	@ApiOperation(value = "좌표들고오기", response = List.class)
 	@GetMapping(value = "/map")
 	public ResponseEntity<List<DongDto>> findLocation() throws Exception {
 		List<DongDto> list = cityService.selectAll();
@@ -71,7 +71,7 @@ public class MainController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@ApiOperation(value = "지도를 이동시킨다.", response = List.class)
+	@ApiOperation(value = "매물을 들고온다.", response = List.class)
 	@GetMapping(value = "/list")
 	public ResponseEntity<List<DongDto>> findlist(@RequestParam Map<String, Object>param) throws Exception {
 		String city=(String) param.get("city");
