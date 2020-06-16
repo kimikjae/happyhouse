@@ -86,7 +86,7 @@
 						<li class="nav-item" id="like"><a class="nav-link"
 							id="liketext" href="<c:url value="/interaction/interform"/>"> 관심지역설정 </a></li>
 						<li class="nav-item" id="likesurrond"><a class="nav-link"
-							id="likesurrondtext" href="<c:url value="#"/>"> 관심지역둘러보기 </a></li>
+							id="likesurrondtext" href="<c:url value="/green/index"/>"> 관심지역둘러보기 </a></li>
 						<li class="nav-item" id="qna"><a class="nav-link"
 							id="qnatext" href="<c:url value="/house/qna"/>"> QnA게시판 </a></li>
 						<li class="nav-item"id="aprt">

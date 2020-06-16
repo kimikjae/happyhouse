@@ -17,6 +17,12 @@
 		 where dongcode=#{param}
 		 limit 1
 	</select>
-	
+	<!-- 
+	String selectGreenByDCAndDong(int dongCode, String dong); -->
+	<select id="selectGreenByDong" resultType="Green">
+		select *
+		  from green
+		 where dong=#{dong}
+	</select>
 </mapper>
 

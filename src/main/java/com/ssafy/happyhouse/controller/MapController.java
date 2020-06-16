@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.Gson;
 import com.ssafy.happyhouse.model.service.MapService;
 
 @RestController
@@ -22,5 +23,11 @@ public class MapController {
 	@GetMapping("/codetoaddress/{code}")
 	public ResponseEntity<String> detailQnA(@PathVariable String code) {
 		return new ResponseEntity<String>(ms.codeToCityGugun(code), HttpStatus.OK);
+	}
+	
+	@GetMapping("/dongtogreen/{dong}")
+	public ResponseEntity<String> dongToGreen(
+			@PathVariable String dong) {
+		return new ResponseEntity<String>(ms.dongToGreen(dong), HttpStatus.OK);
 	}
 }
