@@ -22,7 +22,7 @@ public class InterestLocationDaoImpI implements InterestlocationDao {
 		sqlSession.insert(NS+"insertLocation",interDto);
 	}
 	public List<InteractionDto> selectInterestionById(String memberid) throws IOException {
-		return sqlSession.selectList(NS+"selectLocation", memberid);
+		return sqlSession.selectList(NS+"selectInterestionById", memberid);
 	}
 
 }

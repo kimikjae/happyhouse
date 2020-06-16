@@ -33,11 +33,5 @@ public class interactionController {
 		interservice.registLocation(interDto);
 		return "/index";
 	}
-	@GetMapping("/surround")
-	public String surround(HttpSession httpSession, Model model) {
-		MemberDto mem = (MemberDto) httpSession.getAttribute("loginUser");
-		List<InteractionDto>list = interservice.selectlist(mem.getId());
-		System.out.println(list.size());
-		return "interaction/surround";
-	}
+
 }

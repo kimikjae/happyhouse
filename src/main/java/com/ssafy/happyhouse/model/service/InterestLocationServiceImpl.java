@@ -1,6 +1,6 @@
 package com.ssafy.happyhouse.model.service;
 
-import java.sql.SQLException;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +21,8 @@ public class InterestLocationServiceImpl implements InterestLocationService {
 	}
 
 	@Override
-	public List<InteractionDto> selectlist(String id) {
-		return dao.selectlist(id);
+	public List<InteractionDto> selectlist(String id) throws IOException {
+		return dao.selectInterestionById(id);
 	}
 
 }
