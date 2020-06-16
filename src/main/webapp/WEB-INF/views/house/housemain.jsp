@@ -11,15 +11,13 @@
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-<link rel="stylesheet" type="text/css"
-	href=<c:url value="/resources/css/locationSearch.css"/> />
 <link rel="stylesheet" type="text/css"
 	href=<c:url value="/resources/css/house/housemain.css"/> />
 </head>
 <body>
 	<div id="board">
 		<div id="selectbox">
+			<div id="cen">
 			<select id="city" name="city" class="city">
 				<option value="all">도/광역시</option>
 				<option value="서울특별시">서울시</option>
@@ -43,9 +41,10 @@
 			</select> <select id="dong" name="dong" class="dong">
 				<option value="all">동</option>
 			</select>
+			</div>
 		</div>
 
-		<div id="map" style="width: 50%; height: 500px;"></div>
+		<div id="map" style="width:45%; height: 500px;"></div>
 
 		<div id="leftCenter" class="center">
 			<div class="tableDiv">

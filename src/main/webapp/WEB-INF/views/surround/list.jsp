@@ -11,6 +11,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" 	href=<c:url value="/resources/css/surround/surround.css"/> />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
@@ -18,6 +19,7 @@
 	<%@ include file="/WEB-INF/views/header.jsp"%>
 	<div id="board">
 		<div id="selectbox">
+			<div id="cen">
 			<select id="codename1" name="codename1" class="codename1">
 				<option value="all">-대분류 선택-</option>
 				<option value="음식">음식</option>
@@ -35,11 +37,10 @@
 				<option value="all">--소분류 선택--</option>
 			</select>
 		</div>
+		</div>
 		<hr>
 		<h3>관심 지역 목록</h3>
 		<hr>
-		<div
-			style="overflow: scroll; width: 25%; height: 500px; padding: 2px; float: left;">
 			<div id="leftCenter" class="center">
 				<div class="tableDiv">
 					<table class="table table-bordered">
@@ -48,7 +49,7 @@
 								<th id="nom">번호</th>
 								<th id="ci">동</th>
 								<th id="gu">아파트이름</th>
-								<th id="dong">금액</th>
+								<th id="price">금액</th>
 								<th>선택</th>
 								<th>삭제</th>
 							</tr>
@@ -58,7 +59,6 @@
 					</table>
 				</div>
 			</div>
-		</div>
 		<div id="map" style="width: 45%; height: 500px;"></div>
 	</div>
 	<script type="text/javascript"
