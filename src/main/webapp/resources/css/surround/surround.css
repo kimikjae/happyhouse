@@ -1,0 +1,41 @@
+h3{
+	text-align: center;
+}
+
+#map{
+	float:left;
+}
+#leftCenter{
+	float:left;	
+	width: 50%;
+	max-height:500px;
+	margin-right: 10px;
+}
+.table .thead-light th {
+	text-align: center;	
+	height: 40px;
+	width: 400px;
+}
+.table .thead-light td {
+	text-align: center;
+}
+#nom{
+	width: 20%;
+}
+#ci{
+	width: 20%;
+}
+#gu{
+	width: 20%;
+}
+#price{
+	width: 20%;
+}
+
+#selectbox{
+	margin-bottom: 20px;
+	margin-left: 750px;
+}
+.dong{
+	width: 90px;
+}
