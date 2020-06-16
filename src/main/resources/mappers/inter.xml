@@ -16,4 +16,11 @@
 			#{dong}
 		)
 	</insert>
+	<select id="selectlist" parameterType="String" resultType="InteractionDto">
+		select city,
+		gugun,
+		dong 
+		  from interaction 
+		 where memberid= #{id}
+	</select>
 </mapper>

@@ -6,5 +6,6 @@ import com.ssafy.happyhouse.model.dto.InteractionDto;
 
 public interface InterestLocationService {
 	void registLocation(InteractionDto interDto);
+	List<InteractionDto> selectlist(String id);
 }
 

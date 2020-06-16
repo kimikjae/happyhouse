@@ -20,5 +20,10 @@ public class InterestLocationServiceImpl implements InterestLocationService {
 		dao.insertLocation(interDto);
 	}
 
+	@Override
+	public List<InteractionDto> selectlist(String id) {
+		return dao.selectlist(id);
+	}
+
 }
 

@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.model.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,10 @@ public class InterestLocationDaoImpI implements InterestlocationDao {
 	public void insertLocation(InteractionDto interDto) {
 		sqlSession.insert(NS+"insertLocation",interDto);
 	}
-
-
+	@Override
+	public List<InteractionDto> selectlist(String id) {
+		return sqlSession.selectList(NS+"selectlist",id);
+	}
 
 }
 
