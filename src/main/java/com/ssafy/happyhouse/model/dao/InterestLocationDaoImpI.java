@@ -1,6 +1,8 @@
 package com.ssafy.happyhouse.model.dao;
 
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,10 @@ public class InterestLocationDaoImpI implements InterestlocationDao {
 	@Override
 	public void insertLocation(InteractionDto interDto) {
 		sqlSession.insert(NS+"insertLocation",interDto);
+	}
+	@Override
+	public List<InteractionDto> selectInterestionById(String memberid) throws IOException {
+		return sqlSession.selectList(NS+"selectLocation", memberid);
 	}
 
 

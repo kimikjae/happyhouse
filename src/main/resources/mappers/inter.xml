@@ -16,4 +16,14 @@
 			#{dong}
 		)
 	</insert>
+	<select id="selectInterestionById" parameterType="String" resultType="InteractionDto">
+		select 
+			city, 
+			gugun,
+			dong
+		from 
+			interaction 
+		where 
+			memberid = #{memberid}
+	</select>
 </mapper>
