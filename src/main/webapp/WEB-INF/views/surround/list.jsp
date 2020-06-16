@@ -16,7 +16,7 @@
 	<%@ include file="/WEB-INF/views/header.jsp"%>
 	<div id="board">
 		<div id="selectbox">
-			<select id="city" name="city" class="city">
+			<select id="a" name="a" class="a">
 				<option value="all">도/광역시</option>
 				<option value="서울특별시">서울시</option>
 				<option value="경기도">경기도</option>
@@ -34,9 +34,9 @@
 				<option value="전라북도">전라북도</option>
 				<option value="전라남도">전라남도</option>
 				<option value="제주특별자치도">제주도</option>
-			</select> <select id="gugun" name="gugun" class="gugun">
+			</select> <select id="b" name="b" class="b">
 				<option value="all">시/구/군</option>
-			</select> <select id="dong" name="dong" class="dong">
+			</select> <select id="c" name="c" class="c">
 				<option value="all">동</option>
 			</select>
 		</div>
@@ -53,8 +53,8 @@
 									<td id="city">${list.city}</td>
 									<td id="gugun">${list.gugun}</td>
 									<td id="dong">${list.dong}</td>
-									<td><a href="#">선택</a></td>
-									<td><a href="<c:url value="/surround/delete"/>">삭제</a></td>
+									<td><a href="#" onclick="movemap()">선택</a></td>
+									<td><a href="<c:url value="/surround/delete?no=${list.no }"/>">삭제</a></td>
 								</tr>
 							</c:forEach>
 						</thead>
@@ -77,7 +77,38 @@
 		};
 		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 		const path = "http://localhost:8000/ssafy";
-		$("#map").ready(function() {
+		
+		function movemap(){
+			var city= $('#city').text();
+			var gugun=$('#gugun').text();
+			var dong=$('#dong').text();
+			console.log(city);
+			console.log(gugun);
+			console.log(dong);
+			$.ajax({
+				type : "GET",
+				data : {
+					"city" : city,
+					"gu" : gugun,
+					"dong" : dong
+				},
+				url : path + "/map2",
+				success : function(data) {
+					console.log(data);
+				}
+			})
+		}
+		
+		
+		
+		
+		
+		
+		function setCenter() {
+			var moveLatLon = new kakao.maps.LatLng(data.lat, data.lng);
+			map.setCenter(moveLatLon);
+		}
+	/* 	$("#map").ready(function() {
 			$.ajax({
 				type : "GET",
 				url : path + "/map",
@@ -106,7 +137,7 @@
 					image : markerImage
 				});
 			}
-		}
+		} */
 	</script>
 </body>
 </html>

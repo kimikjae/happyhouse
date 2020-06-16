@@ -14,12 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.ssafy.happyhouse.model.dto.InteractionDto;
 import com.ssafy.happyhouse.model.dto.MemberDto;
 import com.ssafy.happyhouse.model.service.InterestLocationService;
+import com.ssafy.happyhouse.model.service.SurroundService;
 
 @RequestMapping("/surround")
 @Controller
 public class surroundController {
 	@Autowired
 	InterestLocationService interservice;
+	
+	@Autowired
+	SurroundService surservice;
+	
 	
 	@GetMapping("/list")
 	public String surround(HttpSession httpSession, Model model) throws IOException {
@@ -30,11 +35,9 @@ public class surroundController {
 		return "surround/list";
 	}
 	@GetMapping("/delete")
-	public String delete(HttpSession httpSession, Model model) throws IOException {
-		MemberDto mem = (MemberDto) httpSession.getAttribute("loginUser");
-		List<InteractionDto>list = interservice.selectlist(mem.getId());
-		System.out.println(list.size());
-		model.addAttribute("interlist", list);
-		return "surround/list";
+	public String delete(int no, Model model) throws IOException {
+		System.out.println("cont");
+		surservice.delete(no);
+		return "redirect:/surround/list";
 	}
 }

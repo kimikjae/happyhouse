@@ -1,12 +1,21 @@
 package com.ssafy.happyhouse.model.dto;
 
 public class InteractionDto {
+	private int no;
 	private String memberid;
 	private String city;
 	private String gugun;
 	private String dong;
 
 	
+	public int getNo() {
+		return no;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
+	}
+
 	public String getMemberid() {
 		return memberid;
 	}
